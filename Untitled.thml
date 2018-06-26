@@ -1,0 +1,828 @@
+#######
+<div id="abdo-pelvi" class="panel-collapse collapse">
+    <div class="panel-body">
+        <div class="panel-group" id="levelabdo" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#levelabdo" href="#plast-pro-2" aria-expanded="true" aria-controls="plast-pro-2">
+                            <span class="accordian-arrow">
+                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                            </span>
+                                            ABDOMEN::P3
+                        </a>
+                    </h4>
+                </div>
+
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#levelabdo" href="#plast-pro-2" aria-expanded="true" aria-controls="plast-pro-2">
+                            <span class="accordian-arrow">
+                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                            </span>
+                                            PELVIS::P2
+                        </a>
+                    </h4>
+                </div>
+
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#levelabdo" href="#plast-pro-2" aria-expanded="true" aria-controls="plast-pro-2">
+                            <span class="accordian-arrow">
+                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                            </span>
+                                            CONSIGNES
+                        </a>
+                    </h4>
+                </div>
+
+                <div class="panel-heading" role="tab" id="headinorl">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#levelabdo" href="#plast-pro-2" aria-expanded="true" aria-controls="plast-pro-2">
+                            <span class="accordian-arrow">
+                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                            </span>
+                                            ABDOMEN::P2
+                        </a>
+                    </h4>
+                </div>
+
+                <div class="panel-heading" role="tab" id="headinorl">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#levelabdo" href="#plast-pro-2" aria-expanded="true" aria-controls="plast-pro-2">
+                            <span class="accordian-arrow">
+                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                            </span>
+                                            PELVIS::P3
+                        </a>
+                    </h4>
+                </div>
+
+
+
+#######
+
+
+
+
+
+
+
+
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block app_content %}
+        <h1>Hello, {{ current_user.username }}.</h1>
+        <br>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <!------ Include the above in your HEAD tag ---------->
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <div class="row product-listing">
+        	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        		<div class="panel panel-default">
+        			<div class="panel-heading">
+        				IRM
+        			</div>
+
+        			<div class="panel-body nested-accordion">
+        				<div class="row mt-10">
+        					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        						<div class="panel-group" id="level1-accordion">
+        							<div class="panel panel-default">
+        								<div class="panel-heading">
+        									<h4 class="panel-title">
+        									<a data-toggle="collapse" data-parent="#level1-accordion" href="#neuroradio" class="collapsed">
+        									<span class="accordian-arrow">
+        									<i class="fa fa-minus-square-o" aria-hidden="true"></i>
+        									<i class="fa fa-plus-square-o" aria-hidden="true"></i>
+        									</span>
+        													Neuroradiologie
+        									</a>
+        									</h4>
+        								</div>
+
+
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#level1-accordion" href="#abdo-pelvi" class="collapsed">
+                                            <span class="accordian-arrow">
+                                            <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                            </span>
+                                                            Abdominale/Pelvienne
+                                            </a>
+                                            </h4>
+                                        </div>
+
+        								<div id="neuroradio" class="panel-collapse collapse">
+        									<div class="panel-body">
+        										<div class="panel-group" id="level2-accordion" role="tablist" aria-multiselectable="true">
+        											<div class="panel panel-default">
+
+                                                        <div class="panel-heading" role="tab" id="headingcerveau">
+        													<h4 class="panel-title">
+        														<a class="collapsed" role="button" data-toggle="collapse" data-parent="#level2-accordion" href="#plast-pro-2" aria-expanded="true" aria-controls="plast-pro-2">
+        															<span class="accordian-arrow">
+        																<i class="fa fa-minus-square-o" aria-hidden="true"></i>
+        																<i class="fa fa-plus-square-o" aria-hidden="true"></i>
+        															</span>
+        																			CERVEAU
+        														</a>
+        													</h4>
+                                                        </div>
+
+                                                        <div class="panel-heading" role="tab" id="headingrachis">
+        													<h4 class="panel-title">
+        														<a class="collapsed" role="button" data-toggle="collapse" data-parent="#level2-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+        															<span class="accordian-arrow">
+        																<i class="fa fa-minus-square-o" aria-hidden="true"></i>
+        																<i class="fa fa-plus-square-o" aria-hidden="true"></i>
+        															</span>
+        																			RACHIS
+        														</a>
+        													</h4>
+                                                        </div>
+
+                                                        <div class="panel-heading" role="tab" id="headinorl">
+        													<h4 class="panel-title">
+        														<a class="collapsed" role="button" data-toggle="collapse" data-parent="#level2-accordion" href="#plast-pro-2" aria-expanded="true" aria-controls="plast-pro-2">
+        															<span class="accordian-arrow">
+        																<i class="fa fa-minus-square-o" aria-hidden="true"></i>
+        																<i class="fa fa-plus-square-o" aria-hidden="true"></i>
+        															</span>
+        																			ORL
+        														</a>
+        													</h4>
+                                                        </div>
+
+                                                            <div id="plast-pro-2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcerveau">
+        														<div class="panel-body">
+        															<div class="panel-group" id="level3-accordion" role="tablist" aria-multiselectable="true">
+        																<div class="panel panel-default">
+                                                                            <div class="panel-heading" role="tab" id="headingcerveau">
+        																		<h4 class="panel-title">
+        																		<a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+        																		<span class="accordian-arrow">
+        																		<i class="fa fa-minus-square-o" aria-hidden="true"></i>
+        																		<i class="fa fa-plus-square-o" aria-hidden="true"></i>
+        																		</span>
+        																								ISCHÉMIE
+        																		</a>
+        																		</h4>
+        																	</div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingcerveau">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        SELLE TURCIQUE C-/C+
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        ROUTINE C-
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        SELLE TURCIQUE C-
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        ROUTINE C+
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        LEUCOPATHIE/MICROBE
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        SELLE TURCIQUE SUIVI C-
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        THROMBOSE VEINEUSE
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        SINUS CAVERNEUX
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        TUMEUR C+
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        BILAN NEUROVASCULAIRE
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        BASE DU CRÂNE
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        TUMEUR SUIVI C+
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        MAV
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        TRIJUMEAU
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        TUMEUR+ORBITES C+
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        DÉPISTAGE FALCIFORME
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        GLOBE OCCULAIRE FLEX
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        SUIVI ANÉVRISME
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        ORBITES C+
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        SEP
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        EPILEPSIE TEMPORALE
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        ORBITES C-
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        CAI
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+
+                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                <h4 class="panel-title">
+                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                <span class="accordian-arrow">
+                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                                        template
+                                                                                </a>
+                                                                                </h4>
+                                                                            </div>
+
+
+
+                                                                            <div id="plast-pro-3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcerveau">
+                                                                                <div class="panel-body">
+                                                                                    <div class="panel-group" id="level3-accordion" role="tablist" aria-multiselectable="true">
+                                                                                        <div class="panel panel-default">
+                                                                                            <div class="panel-heading" role="tab" id="headingcerveau">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        CERVICAL
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingcerveau">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        CERVICO-THORACIQUE
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        THORACIQUE
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        CERVICO-LOMBAIRE
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        LOMBAIRE
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        THORACO-LOMBAIRE
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        TOTAL 2 SEGMENTS
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        TOTAL 3 SEGMENTS
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        FUITE LCR 3.0T
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        LOMBAIRE C+
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        FUITE LCR 1.5T
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        THORACIQUE C+
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        TOTAL 2 SEGMENTS C+
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        PLEXUS BRACHIAL C+
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        TOTAL 3 SEGMENTS C+
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+                                                                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                                                                <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                <span class="accordian-arrow">
+                                                                                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                                                                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                                                        PLEXUS LOMBAIRE  C+
+                                                                                                </a>
+                                                                                                </h4>
+                                                                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+                                                            <div id="plast-pro-3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+        																							<div class="panel-body">
+        																								<ul class="list-unstyled">
+
+
+        																									<li>
+        																										<div class="panel-group" id="level4-accordion" role="tablist" aria-multiselectable="true">
+        																											<div class="panel panel-default">
+        																												<div class="panel-heading" role="tab" id="headingOne">
+        																													<h4 class="panel-title">
+        																														<a class="collapsed" role="button" data-toggle="collapse" data-parent="#level4-accordion" href="#plast-pro-4" aria-expanded="true" aria-controls="collapseOne">
+        																															<span class="accordian-arrow">
+        																																<i class="fa fa-minus-square-o" aria-hidden="true"></i>
+        																																<i class="fa fa-plus-square-o" aria-hidden="true"></i>
+        																															</span>
+        																															Level 4
+        																														</a>
+        																													</h4>
+        																												</div>
+
+        																												<div id="plast-pro-4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+        																													<div class="panel-body">
+        																														<ul class="list-unstyled">
+        																															<li>
+        																																<div class="checkbox">
+        																																	<label>
+        																																		<input type="checkbox">
+        																																		Level 5
+        																																	</label>
+        																																</div>
+        																															</li>
+
+        																															<li>
+        																																<div class="checkbox">
+        																																	<label>
+        																																		<input type="checkbox">
+        																																		Level 5
+        																																	</label>
+        																																</div>
+        																															</li>
+
+        																															<li>
+        																																<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        																																	<div class="panel panel-default">
+        																																		<div class="panel-heading" role="tab" id="headingOne">
+        																																		  <h4 class="panel-title">
+        																																			<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        																																				<span class="accordian-arrow">
+        																																					<i class="fa fa-minus-square-o" aria-hidden="true"></i>
+        																																					<i class="fa fa-plus-square-o" aria-hidden="true"></i>
+        																																				</span>
+        																																				Level 5
+        																																			</a>
+        																																		  </h4>
+        																																		</div>
+        																																		<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+        																																			<div class="panel-body">
+        																																				<ul class="list-unstyled">
+        																																					<li>
+        																																						<div class="checkbox">
+        																																							<label>
+        																																								<input type="checkbox">
+        																																								Level 6
+        																																							</label>
+        																																						</div>
+        																																					</li>
+
+        																																					<li>
+        																																						<div class="checkbox">
+        																																							<label>
+        																																								<input type="checkbox">
+        																																								Level 6
+        																																							</label>
+        																																						</div>
+        																																					</li>
+        																																				</ul>
+        																																			</div>
+        																																		</div>
+        																																	</div>
+        																																</div>
+        																															</li>
+        																														</ul>
+        																													</div>
+        																												</div>
+        																											</div>
+        																										</div>
+        																									</li>
+        																								</ul>
+        																							</div>
+        																						</div>
+        																					</div>
+        																				</div>
+        																			</li>
+        																		</ul>
+
+        																	</div>
+        																</div>
+        															</div>
+        														</div>
+        													</li>
+        												</ul>
+        											</div>
+
+        											<div class="panel-body">
+        												<a class="text-left collapsed" role="button" data-toggle="collapse" href="#product1-02" aria-expanded="false" aria-controls="collapseExample">
+        													<span class="accordian-arrow">
+        														<i class="fa fa-minus-square-o" aria-hidden="true"></i>
+        														<i class="fa fa-plus-square-o" aria-hidden="true"></i>
+        													</span>
+        													Acrylic
+        												</a>
+        												<div class="collapse" id="product1-02">
+        													<div class="panel-body">
+        														<ul class="list-unstyled">
+        															<li>
+        																<div class="checkbox">
+        																	<label>
+        																	  <input type="checkbox"> Acrylic-imide Copolymers
+        																	</label>
+        																</div>
+        															</li>
+        														</ul>
+        													</div>
+        												</div>
+        											</div>
+        										</div>
+        									</div>
+        								</div>
+        							</div>
+        						</div>
+        					</div>
+
+
+
+        				</div>
+
+
+        			</div>
+        		</div>
+
+
+
+
+
+
+
+
+{% endblock %}

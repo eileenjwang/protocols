@@ -7,10 +7,29 @@ from app.main import bp
 
 
 @bp.route('/', methods=['GET', 'POST'])
-@bp.route('/index', methods=['GET', 'POST'])
+@bp.route('/index/', methods=['GET', 'POST'])
 @login_required
 def index():
-    return render_template('index.html', title='Home')
+#######
+    import json
+
+    import numpy as np
+    import pandas as pd
+
+    file = 'data.json'
+
+    with open(file) as f:
+        json_file = f.read()
+        data = json.loads(json_file)
+
+    many_keys = []
+    for k,v in data['IRM'].items(): # neuroradio, et abdo pelvi
+        for k1, v1 in v.items():
+            for k2, v2 in v1.items():
+                many_keys.append(k2)
+    many_keys = many_keys[0:4]
+##########
+    return render_template('index.html', title='Accueil', many_keys = many_keys)
 
 
 @bp.route('/user/<username>')
@@ -27,9 +46,9 @@ def edit_profile():
     if form.validate_on_submit():
         current_user.username = form.username.data
         db.session.commit()
-        flash('Your changes have been saved.')
+        flash('Vos changements ont été enregistrés.')
         return redirect(url_for('main.edit_profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username
-    return render_template('edit_profile.html', title='Edit Profile',
+    return render_template('edit_profile.html', title='Modifier votre profil',
                            form=form)

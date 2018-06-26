@@ -5,40 +5,40 @@ from app.models import User
 
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
+    username = StringField('Nom d\'utilisateur', validators=[DataRequired()])
+    password = PasswordField('Mot de passe', validators=[DataRequired()])
+    remember_me = BooleanField('Se souvenir de moi')
+    submit = SubmitField('Se connecter')
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    username = StringField('Nom d\'utilisateur', validators=[DataRequired()])
+    email = StringField('Courrier électronique', validators=[DataRequired(), Email()])
+    password = PasswordField('Mot de passe', validators=[DataRequired()])
     password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(),
+        'Retapez votre mot de passe', validators=[DataRequired(),
                                            EqualTo('password')])
-    submit = SubmitField('Register')
+    submit = SubmitField('S\'incrire')
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
-            raise ValidationError('The username you entered is already taken. Please use a different username.')
+            raise ValidationError('Le nom d\'utilisateur que vous avez entré est déjà pris. Veuillez utiliser un nom d\'utilisateur différent.')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
-            raise ValidationError('The email address you entered is already taken. Please use a different email.')
+            raise ValidationError('Le courrier électronique que vous avez entré est déjà pris. Merci d\'utiliser un autre courrier électronique')
 
 
 class ResetPasswordRequestForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Request Password Reset')
+    email = StringField('Courrier électronique', validators=[DataRequired(), Email()])
+    submit = SubmitField('Demande pour une réinitialisation de mot de passe')
 
 
 class ResetPasswordForm(FlaskForm):
-    password = PasswordField('Enter your new Password', validators=[DataRequired()])
+    password = PasswordField('Entrez votre nouveau mot de passe', validators=[DataRequired()])
     password2 = PasswordField(
-        'Repeat your new Password', validators=[DataRequired(),
+        'Retapez votre nouveau mot de passe', validators=[DataRequired(),
                                            EqualTo('password')])
-    submit = SubmitField('Request Password Reset')
+    submit = SubmitField('Demande pour une réinitialisation de mot de passe')
