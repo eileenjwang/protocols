@@ -17,14 +17,14 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash('Nom d\'utilisateur ou mot de passe invalide')
             return redirect(url_for('auth.login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('main.index')
         return redirect(next_page)
-    return render_template('auth/login.html', title='Sign In', form=form)
+    return render_template('auth/login.html', title='Se connecter', form=form)
 
 
 @bp.route('/logout')
@@ -43,9 +43,9 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('You are now a registered user.')
+        flash('Vous êtes maintenant un utilisateur enregistré.')
         return redirect(url_for('auth.login'))
-    return render_template('auth/register.html', title='Register',
+    return render_template('auth/register.html', title='S\'inscrire',
                            form=form)
 
 ### reset password request
@@ -58,10 +58,10 @@ def reset_password_request():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash('Check your email for the instructions to reset your password')
+        flash('Vérifiez votre email pour les instructions pour réinitialiser votre mot de passe')
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password_request.html',
-                           title='Reset Password', form=form)
+                           title='Réinitialisation de mot de passe', form=form)
 
 ### reset password
 @bp.route('/reset_password/<token>', methods=['GET', 'POST'])
@@ -75,6 +75,6 @@ def reset_password(token):
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
-        flash('Your password has been reset.')
+        flash('votre mot de passe a été réinitialisé.')
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password.html', form=form)
