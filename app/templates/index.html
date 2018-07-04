@@ -1,1242 +1,170 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<!------ Include the above in your HEAD tag ---------->
+
 {% extends "base.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
-
 
 {% block app_content %}
         <h1>Bonjour, {{ current_user.username }}.</h1>
         <br>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <!------ Include the above in your HEAD tag ---------->
-
-        <div class="row product-listing">
-        	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        		<div class="panel panel-default">
-        			<div class="panel-heading">
-        				IRM
-        			</div>
-
-        			<div class="panel-body nested-accordion">
-        				<div class="row mt-10">
-        					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        						<div class="panel-group" id="level1-accordion">
-        							<div class="panel panel-default">
-        								<div class="panel-heading">
-        									<h4 class="panel-title">
-        									<a data-toggle="collapse" data-parent="#level1-accordion" href="#neuroradio" class="collapsed">
-        													Neuroradiologie
-        									</a>
-        									</h4>
-        								</div>
-
-        								<div id="neuroradio" class="panel-collapse collapse">
-        									<div class="panel-body">
-        										<div class="panel-group" id="level2-accordion" role="tablist" aria-multiselectable="true">
-        											<div class="panel panel-default">
-                                                        <div class="panel-heading" role="tab" id="headingcerveau">
-        													<h4 class="panel-title">
-        														<a class="collapsed" role="button" data-toggle="collapse" data-parent="#level2-accordion" href="#plast-pro-2" aria-expanded="true" aria-controls="plast-pro-2">
-        																			CERVEAU
-        														</a>
-        													</h4>
-                                                        </div>
-                                                        <div id="plast-pro-2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcerveau">
-                                                            <div class="panel-body">
-                                                                <div class="panel-group" id="level3-accordion" role="tablist" aria-multiselectable="true">
-                                                                    <div class="panel panel-default">
-                                                                        <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#ischemie-table" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                    ISCHÉMIE
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                        <div class="table" id ='ischemie-table'>
-                                                                            <center>
-                                                                            <table>
-                                                                                    <thead><tr><th>Name</th><th>Description</th></tr></thead>
-                                                                                        <tbody>
-                                                                                            <tr><td>Name1</td>
-
-                                                                                            <td>Description1</td></tr>
-                                                                                            <td>
-                                                                                                <table>
-                                                                                                    <thead><tr><th>Name</th><th>Description</th></tr></thead>
-                                                                                                    <tbody>
-                                                                                                    <tr><td>Name1</td><td>Description1</td></tr>
-                                                                                                    </tbody>
-                                                                                                    </thead>
-                                                                                                </table>
-                                                                                            </td>
-                                                                                        <tr><td>Name2</td><td>Description2</td></tr>
-                                                                                        <tr><td>Name3</td><td>Description3</td></tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </center>
-                                                                            </div>
-
-
-                                                                        <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                    SELLE TURCIQUE C-/C+
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                        ROUTINE C-
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                    SELLE TURCIQUE C-
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                    ROUTINE C+
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                    LEUCOPATHIE/MICROBE
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                    SELLE TURCIQUE SUIVI C-
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                THROMBOSE VEINEUSE
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                SINUS CAVERNEUX
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                TUMEUR C+
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                BILAN NEUROVASCULAIRE
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                BASE DU CRÂNE
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                TUMEUR SUIVI C+
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                MAV
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                TRIJUMEAU
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                TUMEUR+ORBITES C+
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                DÉPISTAGE FALCIFORME
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                GLOBE OCCULAIRE FLEX
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                SUIVI ANÉVRISME
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                ORBITES C+
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                SEP
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                EPILEPSIE TEMPORALE
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                ORBITES C-
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                CAI
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                template
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel-heading" role="tab" id="headingcerveau">
-        													<h4 class="panel-title">
-        														<a class="collapsed" role="button" data-toggle="collapse" data-parent="#level2-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-2">
-        															        																			RACHIS
-        														</a>
-        													</h4>
-                                                        </div>
-                                                        <div id="plast-pro-3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcerveau">
-                                                            <div class="panel-body">
-                                                                <div class="panel-group" id="level3-accordion" role="tablist" aria-multiselectable="true">
-                                                                    <div class="panel panel-default">
-                                                                        <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                CERVICAL
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                    <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                        <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                CERVICO-THORACIQUE
-                                                                            </a>
-                                                                            </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                THORACIQUE
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                CERVICO-LOMBAIRE
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                LOMBAIRE
-                                                                            </a>
-                                                                            </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                            THORACO-LOMBAIRE
-                                                                            </a>
-                                                                            </h4>
-                                                                    </div>
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        TOTAL 2 SEGMENTS
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        TOTAL 3 SEGMENTS
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        FUITE LCR 3.0T
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        LOMBAIRE C+
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        FUITE LCR 1.5T
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        THORACIQUE C+
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        TOTAL 2 SEGMENTS C+
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        PLEXUS BRACHIAL C+
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        TOTAL 3 SEGMENTS C+
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        PLEXUS LOMBAIRE  C+
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="panel-heading" role="tab" id="headingcerveau">
-                                                        <h4 class="panel-title">
-                                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#level2-accordion" href="#plast-pro-43" aria-expanded="true" aria-controls="plast-pro-2">
-                                                                                                                                                ORL
-                                                            </a>
-                                                        </h4>
-                                                    </div>
-                                                    <div id="plast-pro-43" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcerveau">
-                                                        <div class="panel-body">
-                                                            <div class="panel-group" id="level3-accordion" role="tablist" aria-multiselectable="true">
-                                                                <div class="panel panel-default">
-                                                                    <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        CAI C-
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-                                                                <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                    <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                            SINUS / MASSIF FACIAL
-                                                                        </a>
-                                                                        </h4>
-                                                                </div>
-
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        CAI C-/C+
-                                                                    </a>
-                                                                    </h4>
-                                                                </div>
-
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        NASOPHARYNX
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        CAI C+ SUIVI
-                                                                        </a>
-                                                                        </h4>
-                                                                </div>
-
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                    LARYNX
-                                                                        </a>
-                                                                        </h4>
-                                                                </div>
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                BASE LANGUE
-                                                                    </a>
-                                                                    </h4>
-                                                                </div>
-
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                CHOLESTÉATOME 3.0T
-                                                                    </a>
-                                                                    </h4>
-                                                                </div>
-
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                CAVITÉ BUCCALE
-                                                                    </a>
-                                                                    </h4>
-                                                                </div>
-
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                CHOLESTÉATOME 1.5T
-                                                                    </a>
-                                                                    </h4>
-                                                                </div>
-
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                COU GÉNÉRAL
-                                                                    </a>
-                                                                    </h4>
-                                                                </div>
-
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                PAROTIDES
-                                                                    </a>
-                                                                    </h4>
-                                                                </div>
-
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                NERF FACIAL
-                                                                    </a>
-                                                                    </h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel-body nested-accordion">
-                        <div class="row mt-10">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="row product-listing">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    	<div class="panel panel-default">
+    	       <div class="panel-heading">
+            		IRM
+            	</div>
+                	<div class="panel-body nested-accordion">
+                		<div class="row mt-10">
+                			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="panel-group" id="level1-accordion">
+                                    {% for ele1 in dicts_all%}
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#level1-accordion" href="#abdopelvi" class="collapsed">
-                                                                                                        Abdominale/Pelvienne
-                                            </a>
-                                            </h4>
-                                        </div>
-
-                                        <div id="abdopelvi" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <div class="panel-group" id="level2-abdo" role="tablist" aria-multiselectable="true">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading" role="tab" id="headingcerveau">
-                                                            <h4 class="panel-title">
-                                                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#level2-abdo" href="#plast-pro-abdo" aria-expanded="true" aria-controls="plast-pro-2">
-                                                                                                                                                        ABDOMEN::P3
-                                                                </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="plast-pro-abdo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcerveau">
-                                                            <div class="panel-body">
-                                                                <div class="panel-group" id="level3-abdo" role="tablist" aria-multiselectable="true">
-                                                                    <div class="panel panel-default">
-                                                                        <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-abdo" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                MASSE HÉPATIQUE CARACTERISATION (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                MASSE HÉPATIQUE CARACTERISATION PRIMOVIST (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                MASSE HÉPATIQUE SUIVI (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                MASSE HÉPATIQUE SUIVI PRIMOVIST (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                POST RFA, TACE, CYBERKNIFE (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                PRÉ GREFFE (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                QUANTIFICATION FIBROSE
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                QUANTIFICATION FER GRAISSE
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                BILAN TUMEUR PANCREAS (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                BILAN TUMEUR KYSTIQUE PANCREAS (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                TUMEUR KYSTIQUE PANCREAS SUIVI (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                MRCP (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                MRCP PRIMOVIST (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                MRCP (C-)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                MASSE RÉNALE BILAN (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                MASSE RÉNALE SUIVI (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                PYÉLORESONNANCE (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                SURRÉNALES (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                SURRÉNALES (C-)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                ENTÉRO-IRM (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                MASSE ABDOMINALE (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                APPENDICE FEMME ENCEINTE (C-)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                        <div class="panel-heading" role="tab" id="headingOne">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                LI-FRAUMENI (C-)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel-heading" role="tab" id="headingcerveau">
-                                                            <h4 class="panel-title">
-                                                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#level2-accordion" href="#plast-pro-pelvis" aria-expanded="true" aria-controls="plast-pro-2">
-                                                                                                                                                        PELVIS::P2
-                                                                </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="plast-pro-pelvis" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcerveau">
-                                                            <div class="panel-body">
-                                                                <div class="panel-group" id="level3-accordion" role="tablist" aria-multiselectable="true">
-                                                                    <div class="panel panel-default">
-                                                                        <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                            <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                RECTUM STAGING (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-                                                                    <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                        <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                    RECTUM POST RADIO-CHIMIO (C-)
-                                                                            </a>
-                                                                            </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                FISTULE PÉRI-ANALE (C+)
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                PELVIS STANDARD (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                        </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                                NÉOPLASIE COL (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                            <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                            NÉOPLASIE ENDOMETRE (C+)
-                                                                            </a>
-                                                                            </h4>
-                                                                    </div>
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        ENDOMETRIOSE(C+)
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        VARIANTE MULLERIENNE (C-)
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        ÉVALUATION PLACENTAIRE (C-)
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        PLANCHER PELVIEN (C-)
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        PROSTATE (C+)
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        PÉNIS (C+)
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        URÈTRE (C+)
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="panel-heading" role="tab" id="headingcerveau">
-                                                        <h4 class="panel-title">
-                                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#level2-accordion" href="#plast-pro-consignes" aria-expanded="true" aria-controls="plast-pro-2">
-                                                                                                                                                CONSIGNES
-                                                            </a>
-                                                        </h4>
-                                                    </div>
-                                                    <div id="plast-pro-consignes" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcerveau">
-                                                        <div class="panel-body">
-                                                            <div class="panel-group" id="level3-accordion" role="tablist" aria-multiselectable="true">
-                                                                <div class="panel panel-default">
-                                                                    <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                        <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        À CHANGER EN ECHO
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-                                                                <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                    <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        À CHANGER EN SCAN
-                                                                        </a>
-                                                                        </h4>
-                                                                </div>
-
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        À REVOIR PAR ÉQUIPE RDV
-                                                                    </a>
-                                                                    </h4>
-                                                                </div>
-
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        DÉJÀ PROTOCOLE
-                                                                        </a>
-                                                                        </h4>
-                                                                    </div>
-
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                        À REVOIR::PERTINENCE
-                                                                        </a>
-                                                                        </h4>
-                                                                </div>
-
-                                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                                    <h4 class="panel-title">
-                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                    QUESTION RÉPONDUE::PERTINENCE
-                                                                        </a>
-                                                                        </h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="panel-heading" role="tab" id="headingcerveau">
-                                                    <h4 class="panel-title">
-                                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#level2-accordion" href="#plast-pro-abdop2" aria-expanded="true" aria-controls="plast-pro-2">
-                                                                                                                                        ABDOMEN::P2
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="plast-pro-abdop2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcerveau">
+                							<h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#level1-accordion" href="#{{ele1.id}}" class="collapsed">
+                            													{{ele1.name}}
+                            					</a>
+                            				</h4>
+                            			</div>
+                                            <div id="{{ele1.id}}" class="panel-collapse collapse">
                                                     <div class="panel-body">
-                                                        <div class="panel-group" id="level3-accordion" role="tablist" aria-multiselectable="true">
+                                                        <div class="panel-group" id="level2-accordion" role="tablist" aria-multiselectable="true">
                                                             <div class="panel panel-default">
+                                                                {% for ele2 in ele1.list %}
                                                                 <div class="panel-heading" role="tab" id="headingcerveau">
                                                                     <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                MASSE HÉPATIQUE CARACTERISATION (C+)
-                                                                    </a>
+                                                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#level2-accordion" href="#{{ele2.id}}" aria-expanded="true" aria-controls="plast-pro-2">
+                                                                            {{ele2.name}}
+                                                                        </a>
                                                                     </h4>
+                                                                        <div id="{{ele2.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcerveau">
+                                                                            <div class="panel-body">
+                                                                                <div class="panel-group" id="level3-accordion" role="tablist" aria-multiselectable="true">
+                                                                                    <div class="panel panel-default">
+                                                                                        {% for ele3 in ele2.list %}
+                                                                                        <div class="panel-heading" role="tab" id="headingcerveau">
+                                                                                            <h4 class="panel-title">
+                                                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#{{ele3.id}}" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                    {{ele3.name}}
+                                                                                                </a>
+                                                                                            </h4>
+                                                                                            <div id="{{ele3.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcerveau">
+                                                                                                <div class="panel-body">
+                                                                                                    <div class="panel-group" id="level3-accordion" role="tablist" aria-multiselectable="true">
+                                                                                                        <div class="panel panel-default">
+                                                                                                            {% for ele4 in ele3.list %}
+                                                                                                            <div class="panel-heading" role="tab" id="headingcerveau">
+                                                                                                                <h4 class="panel-title">
+                                                                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#{{ele4.id}}" aria-expanded="true" aria-controls="plast-pro-3">
+                                                                                                                            {{ele4.name}}
+                                                                                                                    </a>
+                                                                                                                </h4>
+                                                                                                                <div id="{{ele4.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcerveau">
+                                                                                                                    <div class="panel-body" >
+                                                                                                                        <div class="panel-group" id="level3-accordion" role="tablist" aria-multiselectable="true">
+                                                                                                                            <div class="panel panel-default">
+                                                                                                                                {% for ele5 in ele4.list %}
+                                                                                                                                <div class="panel-heading" role="tab" id="headingcerveau">
+                                                                                                                                    <h4 class="panel-title">
+                                                                                                                                        <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#{{ele5.id}}" aria-expanded="true" aria-controls="plast-pro-3" >
+                                                                                                                                                {{ele5.name}}
+                                                                                                                                        </a>
+                                                                                                                                    </h4>
+                                                                                                                                    <div id="{{ele5.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+
+
+
+
+                                                                                                                                        {% for ele6 in ele5.list %}
+                                                                                                                                            <p><strong>{{ele6.name}}: </strong>
+
+                                                                                                                                                {% for ele7 in ele6.list %}
+                                                                                                                                                    {% if ele7 is not mapping %}
+                                                                                                                                                        {% if ele6.list[0] == True %}
+                                                                                                                                                            Oui </p>
+                                                                                                                                                        {% elif ele6.list[0]== False %}
+                                                                                                                                                            Non </p>
+                                                                                                                                                        {% else %}
+                                                                                                                                                            {{ele6.list[0]}}</p>
+                                                                                                                                                        {% endif %}
+                                                                                                                                                    {%endif%}
+
+                                                                                                                                                    {% if ele7 is mapping%} {# pour injection et sequence #}
+                                                                                                                                                        {%if ele6.name == 'Injection'  %}
+                                                                                                                                                            {%if ele7.name == 'aucune' and ele7.list[0] == True%}
+                                                                                                                                                            <ul style="list-style-type:disc">
+                                                                                                                                                                <li><strong>{{ele7.name}}: </strong> Oui </li>
+                                                                                                                                                            </ul>
+                                                                                                                                                                {%break%}
+                                                                                                                                                            {% else %}
+                                                                                                                                                            <ul style="list-style-type:disc">
+                                                                                                                                                                <li><strong>{{ele7.name}}: </strong> {{ele7.list[0]}} </li>
+                                                                                                                                                            </ul>
+                                                                                                                                                            {%endif %}
+
+                                                                                                                                                        {%elif ele6.name == 'Séquences' %}
+                                                                                                                                                            {%if ele7.name == 'Nom'%}
+                                                                                                                                                            <ul style="list-style-type:disc" align = "left">
+                                                                                                                                                                <li><strong>{{ele7.name}}: </strong> {{ele7.list[0]}} ---
+                                                                                                                                                            {% elif ele7.name == 'Durée'%}
+                                                                                                                                                            <strong> {{ele7.name}}: </strong> {{ele7.list[0]}}</li>
+                                                                                                                                                            </ul>
+                                                                                                                                                            {%endif%}
+
+                                                                                                                                                        {% else %}
+                                                                                                                                                            <ul style="list-style-type:disc">
+                                                                                                                                                                <li><strong>{{ele7.name}}: </strong>
+                                                                                                                                                                    {% if ele7.list[0] == True %}
+                                                                                                                                                                        Oui </li>
+                                                                                                                                                                    {% elif ele7.list[0]== False %}
+                                                                                                                                                                        Non </li>
+                                                                                                                                                                    {%else%}
+                                                                                                                                                                    {{ele7.list[0]}}</li>
+                                                                                                                                                                    {%endif%}
+                                                                                                                                                            </ul>
+                                                                                                                                                        {%endif %}
+                                                                                                                                                    {%endif%}
+
+                                                                                                                                                {%endfor%}
+
+
+                                                                                                                                        <hr noshade style="margin:10px" color= "#000000" >
+                                                                                                                                        {%endfor%}
+
+
+
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                {% endfor %}
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            {% endfor %}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        {% endfor %}
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    {% endfor %}
                                                                 </div>
-                                                            <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                    MASSE HÉPATIQUE CARACTERISATION PRIMOVIST (C+)
-                                                                    </a>
-                                                                    </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                MASSE HÉPATIQUE SUIVI (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                MASSE HÉPATIQUE SUIVI PRIMOVIST (C+)
-                                                                    </a>
-                                                                    </h4>
-                                                                </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                POST RFA, TACE, CYBERKNIFE (C+)
-                                                                    </a>
-                                                                    </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                            PRÉ GREFFE (C+)
-                                                                    </a>
-                                                                    </h4>
-                                                            </div>
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        QUANTIFICATION FIBROSE
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        QUANTIFICATION FER GRAISSE
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        BILAN TUMEUR PANCREAS (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        BILAN TUMEUR KYSTIQUE PANCREAS (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        TUMEUR KYSTIQUE PANCREAS SUIVI (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        MRCP (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        MRCP PRIMOVIST (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        MRCP (C-)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        MASSE RÉNALE BILAN (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        MASSE RÉNALE SUIVI (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        PYÉLORESONNANCE (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        SURRÉNALES (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        SURRÉNALES (C-)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        ENTÉRO-IRM (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        MASSE ABDOMINALE (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        APPENDICE FEMME ENCEINTE (C-)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        LI-FRAUMENI (C-)
-                                                                </a>
-                                                                </h4>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                </div>
-
-
-                                                <div class="panel-heading" role="tab" id="headingcerveau">
-                                                    <h4 class="panel-title">
-                                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#level2-accordion" href="#plast-pro-pelvis3" aria-expanded="true" aria-controls="plast-pro-2">
-                                                                                                                                        PELVIS::P3
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="plast-pro-pelvis3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcerveau">
-                                                    <div class="panel-body">
-                                                        <div class="panel-group" id="level3-accordion" role="tablist" aria-multiselectable="true">
-                                                            <div class="panel panel-default">
-                                                                <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                    <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                RECTUM STAGING (C+)
-                                                                    </a>
-                                                                    </h4>
-                                                                </div>
-                                                            <div class="panel-heading" role="tab" id="headingcerveau">
-                                                                <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                RECTUM POST RADIO-CHIMIO (C-)
-                                                                    </a>
-                                                                    </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                FISTULE PÉRI-ANALE (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                PELVIS STANDARD (C+)
-                                                                    </a>
-                                                                    </h4>
-                                                                </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                                NÉOPLASIE COL (C+)
-                                                                    </a>
-                                                                    </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                    <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                            NÉOPLASIE ENDOMETRE (C+)
-                                                                    </a>
-                                                                    </h4>
-                                                            </div>
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        ENDOMETRIOSE(C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        VARIANTE MULLERIENNE (C-)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        ÉVALUATION PLACENTAIRE (C-)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        PLANCHER PELVIEN (C-)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        PROSTATE (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        PÉNIS (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                <h4 class="panel-title">
-                                                                <a class="text-left collapsed" role="button" data-toggle="collapse" data-parent="#level3-accordion" href="#plast-pro-3" aria-expanded="true" aria-controls="plast-pro-3">
-                                                                                                                                                        URÈTRE (C+)
-                                                                </a>
-                                                                </h4>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                {% endfor %}
                                             </div>
                                         </div>
                                     </div>
@@ -1246,6 +174,8 @@
                     </div>
                 </div>
             </div>
-            
+        </div>
+    </div>
+</div>
 
-{% endblock %}
+{%endblock%}
