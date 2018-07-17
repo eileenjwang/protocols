@@ -8,6 +8,8 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from config import Config
+from flask_wtf.csrf import CSRFProtect
+
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -16,6 +18,7 @@ login.login_view = 'auth.login'
 login.login_message = 'Please log in to access this page.'
 mail = Mail()
 bootstrap = Bootstrap()
+csrf = CSRFProtect()
 
 
 
@@ -23,6 +26,8 @@ bootstrap = Bootstrap()
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
+    csrf.init_app(app)
+
 
     app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 

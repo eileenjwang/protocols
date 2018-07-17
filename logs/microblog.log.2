@@ -1,112 +1,4 @@
-2018-06-28 14:13:59,879 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-06-28 14:17:11,487 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-06-28 14:17:33,260 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-06-28 14:18:51,750 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:16:32,083 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:16:34,219 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/eileenwang/protocols/app/main/routes.py", line 19, in index
-    with sql.connect("database.db") as con:
-NameError: name 'sql' is not defined
-2018-07-03 15:16:56,598 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:16:58,402 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/eileenwang/protocols/app/main/routes.py", line 21, in index
-    data = cur.execute("SELECT JSON_text FROM Protocoles ORDER BY column DESC LIMIT 1")
-sqlite3.OperationalError: no such table: Protocoles
-2018-07-03 15:17:47,728 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:21:30,587 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:21:33,163 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/eileenwang/protocols/app/main/routes.py", line 21, in index
-    data = cur.execute("SELECT JSON_text FROM Protocoles ORDER BY version_id DESC LIMIT 1")
-sqlite3.OperationalError: no such table: Protocoles
-2018-07-03 15:21:56,204 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:21:57,614 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/eileenwang/protocols/app/main/routes.py", line 26, in index
-    for k1, v1 in data['IRM'].items():
-TypeError: 'sqlite3.Cursor' object is not subscriptable
-2018-07-03 15:22:41,857 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:22:43,440 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/eileenwang/protocols/app/main/routes.py", line 22, in index
-    dict(data)
-ValueError: dictionary update sequence element #0 has length 1; 2 is required
-2018-07-03 15:28:13,215 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:28:30,945 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:31:43,695 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:31:45,179 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
+2018-07-03 15:36:02,249 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
   File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -124,5 +16,105 @@ Traceback (most recent call last):
     return func(*args, **kwargs)
   File "/Users/eileenwang/protocols/app/main/routes.py", line 27, in index
     for k1, v1 in data['IRM'].items():
-TypeError: 'sqlite3.Cursor' object is not subscriptable
-2018-07-03 15:35:59,500 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
+TypeError: list indices must be integers or slices, not str
+2018-07-03 15:36:27,292 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
+2018-07-03 15:36:28,797 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/eileenwang/protocols/app/main/routes.py", line 28, in index
+    for k1, v1 in data['IRM'].items():
+TypeError: list indices must be integers or slices, not str
+2018-07-03 15:37:28,092 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
+2018-07-03 15:37:29,560 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/eileenwang/protocols/app/main/routes.py", line 29, in index
+    for k1, v1 in data['IRM'].items():
+TypeError: list indices must be integers or slices, not str
+2018-07-03 15:40:40,145 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
+2018-07-03 15:40:43,134 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/eileenwang/protocols/app/main/routes.py", line 21, in index
+    cur.execute("SELECT JSON_text FROM Protocoles ORDER BY version_id DESC LIMIT 1")
+sqlite3.OperationalError: no such table: Protocoles
+2018-07-03 15:41:06,741 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
+2018-07-03 15:41:08,031 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/eileenwang/protocols/app/main/routes.py", line 24, in index
+    dict(data)
+ValueError: dictionary update sequence element #0 has length 1; 2 is required
+2018-07-03 15:41:29,712 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
+2018-07-03 15:41:31,491 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/eileenwang/protocols/app/main/routes.py", line 24, in index
+    dict(data)
+ValueError: dictionary update sequence element #0 has length 1; 2 is required
+2018-07-03 15:41:53,109 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
