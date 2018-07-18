@@ -16,7 +16,7 @@ class DataTree:
 
     def __init__(self, json_data):
         self.json_data = json_data
-        self.tree = DataTree.json_to_graph(self.json_data)
+        self.tree = [DataTree.json_to_graph(self.json_data)]
 
     def __str__(self):
         return DataTree.node_to_str(self.tree)
@@ -92,9 +92,7 @@ class DataTree:
                                    ]
         """
        
-        json_tree = []
         level = root_level
-
         for key, node_data in json_data.items():
             node_id = '{prefix}_{level}-{slug}'.format(
                 prefix=prefix, 
@@ -102,14 +100,15 @@ class DataTree:
                 slug=DataTree.slugify(key))
             node_id = node_id.strip('_')
 
-            root_leaf = False
+            is_root_leaf = False
             is_leaf = False
+            is_terminal_leaf = False
 
             if is_parent_leaf:
                 is_leaf = True
             elif DataTree.is_leaf(key, node_data):
                 is_leaf = True
-                root_leaf = True
+                is_root_leaf = True
 
             # add child nodes in recursive fashion
             children = []
@@ -143,6 +142,7 @@ class DataTree:
                 leaf_type = type(node_data).__name__
                 if isinstance(node_data, bool) or isinstance(node_data, str):
                     leaf_content = node_data
+                    is_terminal_leaf = True
 
             node = {
                 'id': node_id,
@@ -152,7 +152,8 @@ class DataTree:
                 'is_leaf': is_leaf,
                 'leaf_type': leaf_type,
                 'leaf_content': leaf_content,
-                'root_leaf': root_leaf
+                'is_root_leaf': is_root_leaf,
+                'is_terminal_leaf': is_terminal_leaf
             }
             return node
 
@@ -227,7 +228,7 @@ def index():
     json_data = json.loads(rows[0][0])
     tree_obj = DataTree(json_data)
 
-    return render_template('index.html', title='Accueil', data=tree_obj.tree)
+    return render_template('index.html', title='Accueil', protocols=tree_obj.tree)
 
 
 @bp.route('/user/<username>')
