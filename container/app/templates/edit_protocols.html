@@ -9,80 +9,15 @@ Modifier protocoles
 
 {% block app_content %}
 
-<h1>Modifier un protocole</h1>
+<h1>{{title}}</h1>
 
-<form class = "container" method="post" role="form">
-    {{ form.hidden_tag() }}
-    {{ wtf.form_errors(form, hiddens="only") }}       <!--{{ form.csrf_token }}-->
-
-    {{ wtf.form_field(form.Implantation, placeholder='') }}
-    <hr>
-
-    {{ form.InstallationPatient.label }}
-    <div class = "container">
-    {% for child in form.InstallationPatient %}
-        {{ wtf.form_field(child, class="form-inline") }}
-    {% endfor %}
-    </div>
-    <hr>
-
-    {{ wtf.form_field(form.Antenne) }}
-    <hr>
-
-    {{ form.Séquences.label }}
-    <div class = "container">
-        {{ form.hidden_tag() }}
-        {% for child in form.Séquences %}
-            {% for element in child %}
-                {{wtf.form_field(element, class="form-inline")}}
-            {% endfor %}
-        {% endfor %}
-    </div>
-    <hr>
-
-    {{ form.Injection.label }}
-    <div class = "container">
-    {% for child in form.Injection %}
-        {{ wtf.form_field(child, class="form-inline") }}
-    {% endfor %}
-    </div>
-    <hr>
-
-    {{ wtf.form_field(form.Protocole_machine) }}
-    <hr>
-
-    {{ wtf.form_field(form.Durée_acquisition) }}
-    <hr>
-
-    {{ wtf.form_field(form.Durée_examen) }}
-    <hr>
-
-    {{ wtf.form_field(form.Durée_bloc_irm ) }}
-    <hr>
-
-    {{ wtf.form_field(form.Date_création) }}
-    <hr>
-
-    {{ wtf.form_field(form.Date_dernière_modification) }}
-    <hr>
-
-    {{ wtf.form_field(form.Auteur) }}
-    <hr>
-
-    {{ form.Statut.label }}
-    <div class = "container">
-    {% for child in form.Statut %}
-        {{ wtf.form_field(child, class="form-inline") }}
-    {% endfor %}
-    </div>
-
-
-    {{ wtf.form_field(form.submit) }}
-
-
-    </form>
-        <br>
-        <br>
-        <br>
-        <br>
+<form class="form" method="post" role="form">
+    {{ wtf.quick_form(form, form_type='horizontal') }}
+    <!-- {{ form.hidden_tag() }}
+    {{ wtf.form_errors(form, hiddens="only") }} 
+    {% for field in form %}
+        {{wtf.form_field(field, class="form-control form-inline")}}
+    {% endfor %} -->
+<button type="submit" class="btn btn-primary mb-2">Submit</button>
+</form>
 {% endblock %}
