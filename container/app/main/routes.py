@@ -163,12 +163,7 @@ class DataTree:
         """
         Predefined manner to determine if node is leaf (can be changed if we decide to change the schema in the future).
         """
-
         rvalue = isinstance(value, dict) and len(value.items()) > 1 and 'SALLE' in key
-        if rvalue:
-            print('***Found leaf:', key)
-        else:
-            print('Not a leaf:', key)
         return rvalue
 
 
