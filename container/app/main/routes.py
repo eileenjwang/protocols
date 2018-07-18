@@ -284,10 +284,11 @@ class DataNode:
                 DynamicForm.append_field(attr, TextField(node.label, validators=[DataRequired()]))
 
             elif node.leaf_type == 'dict':
+                sub_form_class = type(attr + 'Class', (DynamicDictForm,), {})
                 for child in node.children:
                     child_attr = camelify(child.label)
-                    DynamicDictForm.append_field(child_attr, TextField(child.label, validators=[DataRequired()]))
-                DynamicForm.append_field(attr, FormField(DynamicDictForm))
+                    sub_form_class.append_field(child_attr, TextField(child.label, validators=[DataRequired()]))
+                DynamicForm.append_field(attr, FormField(sub_form_class))
             
             form_field_info.append(
                 {
