@@ -277,6 +277,7 @@ class DataNode:
         for node in self.children:
             field_label = node.label
             attr = camelify(field_label)
+            sub_form_class = None
             content = None
 
             if node.leaf_type == 'str' or node.leaf_type == 'bool':
@@ -290,10 +291,19 @@ class DataNode:
                     sub_form_class.append_field(child_attr, TextField(child.label, validators=[DataRequired()]))
                 DynamicForm.append_field(attr, FormField(sub_form_class))
             
+            elif node.leaf_type == 'list':
+                first_list = node.children[0]
+                sub_form_class = type(attr + 'ListClass', (DynamicDictForm,), {})
+                for child in first_list.children:
+                    child_attr = camelify(child.label)
+                    sub_form_class.append_field(child_attr, TextField(child.label, validators=[DataRequired()]))
+                DynamicForm.append_field(attr, FieldList(FormField(sub_form_class)))
+            
             form_field_info.append(
                 {
                     'node': node,
                     'attr': attr,
+                    'sub_form_class': sub_form_class,
                     # 'content': content,
                     # 'field_obj': field_obj
                 })
@@ -306,6 +316,7 @@ class DataNode:
         for field_d in form_field_info:
             attr = field_d['attr']
             node = field_d['node']
+            sub_form_class = field_d['sub_form_class']
             if node.leaf_type == 'str' or node.leaf_type == 'bool':
                 getattr(form, attr).data = node.leaf_content
 
@@ -314,6 +325,15 @@ class DataNode:
                     child_attr = camelify(child.label)
                     print('** dict data', getattr(getattr(form, attr), child_attr))
                     getattr(getattr(form, attr), child_attr).data = child.leaf_content
+
+            elif node.leaf_type == 'list':
+                for node_list in node.children:
+                    child_form = sub_form_class()
+                    for child in node_list.children:
+                        child_attr = camelify(child.label)
+                        setattr(child_form, child_attr, child.leaf_content)
+                        # getattr(child_form, child_attr).data = child.leaf_content
+                    getattr(form, attr).append_entry(child_form)
 
         return form
 
@@ -447,35 +467,6 @@ def edit_protocols(id):
     #     # con.close()
     #     # flash('Vos changements ont été enregistrés.')
     #     # return redirect(url_for('main.index'))
-
-    # elif request.method == 'GET':
-    #     for field in form:
-    #         field.data = 
-    #     form.Implantation.data = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Implantation")
-    #     form.InstallationPatient.Durée.data = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("InstallationPatient", {}).get('Durée')
-    #     form.Antenne.data = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Antenne")
-    #     ### partially hard-coded for class Séquences
-    #     dict_sequences=[]
-    #     dict_sequences.append(data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Séquences")[0])
-    #     dict_sequences.append(data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Séquences")[1])
-    #     for element in range(0,len(dict_sequences)):
-    #         childform = sub_Séquences()
-    #         childform.Nom = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Séquences")[element]['Nom']
-    #         childform.Durée = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Séquences")[element]['Durée']
-    #         form.Séquences.append_entry(childform)
-    #     ### Injection
-    #     form.Injection.Contraste.data = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Injection", {}).get("Contraste")
-    #     form.Injection.pré_scan.data = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Injection", {}).get("pré_scan")
-    #     form.Injection.per_scan.data = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Injection", {}).get("per_scan")
-    #     ###
-    #     form.Protocole_machine.data = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Protocole_machine")
-    #     form.Durée_acquisition.data = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Durée_acquisition")
-    #     form.Durée_examen.data = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Durée_examen")
-    #     form.Durée_bloc_irm.data = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Durée_bloc_irm")
-    #     form.Date_création.data = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Date_création")
-    #     form.Date_dernière_modification.data = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Date_dernière_modification")
-    #     form.Auteur.data = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Auteur")
-    #     form.Statut.Production.data = data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5], {}).get("Statut", {}).get("Production")
 
     title = 'Modifier protocole {}'.format(form_node.label)
     return render_template('edit_protocols.html', form=form, title=title)
