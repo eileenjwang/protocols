@@ -215,17 +215,20 @@ class DataTree:
 
         return s
 
+def get_json_data():
+    with sql.connect("protocols.db") as con:
+        cur = con.cursor()
+        cur.execute("SELECT JSON_text FROM Protocols ORDER BY version_id DESC LIMIT 1")
+        rows = cur.fetchall()
+    return json.loads(rows[0][0])
+
+
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index/', methods=['GET', 'POST'])
 @login_required
 @csrf.exempt
 def index():
-    with sql.connect("protocols.db") as con:
-        cur = con.cursor()
-        cur.execute("SELECT JSON_text FROM Protocols ORDER BY version_id DESC LIMIT 1")
-        rows = cur.fetchall()
-
-    json_data = json.loads(rows[0][0])
+    json_data = get_json_data()
     tree_obj = DataTree(json_data)
 
     return render_template('index.html', title='Accueil', protocols=tree_obj.tree)
