@@ -1,0 +1,18 @@
+/* Add custom styles here */
+
+.card-header p {
+margin-bottom: 0;
+}
+
+.protocols .card.root-leaf {
+margin-bottom: 1rem;
+}
+
+.form-label, .form-title {
+  font-weight: bold;
+}
+
+.protocols .list .form-label:after {
+  content: "|";
+}
+

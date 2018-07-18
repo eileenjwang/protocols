@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
@@ -6,16 +5,55 @@
   <h1>Bonjour, {{ current_user.username }}.</h1>
   <br>
 
-<ul>
+<div class="row">
+  <div class="col-12 protocols">
 	{% for node in protocols recursive %}
-	<li> {{node.label}}
-		{% if node.is_terminal_leaf %}
-			{{node.leaf_content}}
+		{% if node.is_child_leaf %}
+					{% if node.leaf_type == 'str' or node.leaf_type == 'bool' %}
+					<p><span class='form-label'>{{node.label}}</span>: {{node.leaf_content}}</p>
+
+					{% elif node.leaf_type == 'list' %}
+						<p class="form-title list"> {{node.label}} </p>
+						<ul>
+						{% for list in node.children %}
+							<li>
+							{% for child in list.children %}
+								<span class='form-label'>{{child.label}}</span>: {{child.leaf_content}} &nbsp;
+							{% endfor %}
+							</li>
+						{% endfor %}
+						</ul>
+
+					{% elif node.leaf_type == 'dict' %}
+						<p class='form-title'>{{node.label}}</p>
+						<ul>
+						{% for child in node.children %}
+								<li><span class='form-label'>{{child.label}}</span>: {{child.leaf_content}}</li>
+						{% endfor %}
+						</ul>
+
+					{% else %}
+						<p>Houston, we have a problem. {{node.leaf_type}}</p>
+					{% endif %}
 		{% else %}
-			<ul> {{ loop(node.children)}} </ul>
+			 <div class="card {% if node.is_root_leaf %}root-leaf{% endif %}">
+			 	 <div class="card-header">
+		        <p>
+		          <a data-toggle="collapse" href="#{{node.id}}" class="collapsed">
+		            {{node.label}}
+		          </a>
+		        </p>
+		        {% if node.is_root_leaf %}
+		        <a class="btn" href="{{ url_for('main.edit_protocols', id = node.id) }}">Edit</a>
+		        {% endif %}
+		      </div>
+		      <div id="{{node.id}}" class="card-body">
+							{{loop(node.children)}}
+					</div><!-- / end panel-collapse -->
+				</div> <!-- / end panel-group -->
 		{% endif %}
-	</li>
-{% endfor %}
-</ul>
+	{% endfor %}
+	</div>
+</div>
 
 {%endblock%}
