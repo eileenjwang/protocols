@@ -8,7 +8,213 @@ import sqlite3 as sql
 import json
 import datetime, time
 from app import csrf
+import re
+from pprint import pprint
+import unidecode
 
+class DataTree:
+
+    def __init__(self, json_data):
+        self.json_data = json_data
+        self.tree = DataTree.json_to_graph(self.json_data)
+
+    def __str__(self):
+        return DataTree.node_to_str(self.tree)
+
+    @staticmethod
+    def node_to_str(node, level=0):
+        if node['is_leaf'] and (node['leaf_type'] == 'str' or node['leaf_type'] == 'bool'):
+            content = '{indent}* {node_label}:{node_content}'.format(
+                  indent = '  ' * node['level'],
+                  node_label = node['label'],
+                  node_content = node['leaf_content']
+                )
+        else:
+            children_content = '\n'.join([DataTree.node_to_str(child, level=node['level']) for child in node['children']])
+            content = '{indent}{node_id}\n{node_content}'.format(
+              level = node['level'],
+              indent = '  ' * node['level'],
+              node_id = node['id'],
+              node_content = children_content
+            )
+
+        # print(content)
+        return content
+
+    @staticmethod
+    def json_to_graph(json_data, root_level=0, is_parent_leaf=False, prefix=''):
+        """Converts json object into graph object that is easier to traverse and output in template.
+
+        Args:
+            json_data (dict): the json data (dict of dicts of dicts ... of dicts (depth of n))
+
+        Returns:
+            json_tree (list): list of nodes (dict) of the form
+                [ 
+                    {
+                        'id': <str>, 
+                        'label': <str>, 
+                        'level': <int>,
+                        'children': <list>, 
+                        'is_leaf': <bool>, 
+                        'leaf_type': <str>,
+                        'leaf_content': <str>
+                    },
+                    ...
+                ]
+                such that:
+                    id (str): unique to the node
+                    label (str): the node label (corresponds to dictionary key)
+                    children (list): list of child nodes
+                    is_leaf (bool): True if node correponds to the level that must be output in form format 
+                        (not necessarily the last level of the dict), False if corresponds to accordion header
+                    leaf_type (str): One of ['str', 'bool', 'list', 'dict', None]
+                        None if is_leaf is False
+                        Examples of (key, value) pairs according to leaf_type:
+                            'str': 
+                                "Antenne": "head coil"
+                            'bool':
+                                "Implantation": true
+                            'dict': 
+                                "Injection": {
+                                    "aucune": true,
+                                    "pré_scan": false,
+                                    "per_scan": false
+                                   }
+                            'list':
+                                "Séquences": [
+                                    {
+                                     "Nom": "T1 AXIAL",
+                                     "Durée": "00:03:45"
+                                    },
+                                    {
+                                     "Nom": "FLAIR AXIAL",
+                                     "Durée": "00:04:02"
+                                    }
+                                   ]
+        """
+       
+        json_tree = []
+        level = root_level
+
+        for key, node_data in json_data.items():
+            node_id = '{prefix}_{level}-{slug}'.format(
+                prefix=prefix, 
+                level=level,
+                slug=DataTree.slugify(key))
+            node_id = node_id.strip('_')
+
+            root_leaf = False
+            is_leaf = False
+
+            if is_parent_leaf:
+                is_leaf = True
+            elif DataTree.is_leaf(key, node_data):
+                is_leaf = True
+                root_leaf = True
+
+            # add child nodes in recursive fashion
+            children = []
+            if isinstance(node_data, dict):
+                for child_key, child_node_data in node_data.items():
+                    child_dict = {child_key: child_node_data}
+                    children.append(
+                        DataTree.json_to_graph(
+                            child_dict, 
+                            root_level=level+1, 
+                            prefix=node_id,
+                            is_parent_leaf=is_leaf
+                        )
+                    )
+
+            if isinstance(node_data, list):
+                for child_node_data in node_data:
+                    child_dict = { 'list' : child_node_data}
+                    children.append(
+                        DataTree.json_to_graph(
+                            child_dict, 
+                            root_level=level+1, 
+                            is_parent_leaf=is_leaf,
+                            prefix=node_id
+                        )
+                    )
+
+            leaf_type = None
+            leaf_content = None
+            if is_leaf:
+                leaf_type = type(node_data).__name__
+                if isinstance(node_data, bool) or isinstance(node_data, str):
+                    leaf_content = node_data
+
+            node = {
+                'id': node_id,
+                'label': key,
+                'level': level,
+                'children': children,
+                'is_leaf': is_leaf,
+                'leaf_type': leaf_type,
+                'leaf_content': leaf_content,
+                'root_leaf': root_leaf
+            }
+            return node
+
+
+    @staticmethod
+    def is_leaf(key, value):
+        """
+        Predefined manner to determine if node is leaf (can be changed if we decided to change the schema in the future).
+        """
+
+        rvalue = isinstance(value, dict) and len(value.items()) > 1 and 'SALLE' in key
+        if rvalue:
+            print('***Found leaf:', key)
+        else:
+            print('Not a leaf:', key)
+        return rvalue
+
+
+    @staticmethod
+    def slugify(s):
+        """
+        Simplifies ugly strings into something URL-friendly.
+        >>> print slugify("[Some] _ Article's Title--")
+        some-articles-title
+        source: https://blog.dolphm.com/slugify-a-string-in-python/
+        """
+
+        # "[Some] _ Article's Title--"
+        # "[some] _ article's title--"
+        s = s.lower()
+
+        # "[some] _ article's_title--"
+        # "[some]___article's_title__"
+        for c in [' ', '-', '.', '/']:
+            s = s.replace(c, '_')
+
+        # "[some]___article's_title__"
+        # "some___articles_title__"
+        s = re.sub('\W', '', s)
+
+        # "some___articles_title__"
+        # "some   articles title  "
+        s = s.replace('_', ' ')
+
+        # "some   articles title  "
+        # "some articles title "
+        s = re.sub('\s+', ' ', s)
+
+        # "some articles title "
+        # "some articles title"
+        s = s.strip()
+
+        # "some articles title"
+        # "some-articles-title"
+        s = s.replace(' ', '-')
+
+        # remove accents
+        s = unidecode.unidecode(s)
+
+        return s
 
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index/', methods=['GET', 'POST'])
