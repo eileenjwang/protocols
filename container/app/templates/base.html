@@ -1,19 +1,36 @@
-{% extends 'bootstrap/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}
-    {% if title %}
-        {{ title }} - Protocoles
-    {% else %}
-        Bienvenue à Protocoles
-    {% endif %}
-{% endblock %}
+  <head>
 
-{% block head %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-{% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>
+        {% block title %}
+            {% if title %}
+                {{ title }} - Protocoles
+            {% else %}
+                Bienvenue à Protocoles
+            {% endif %}
+        {% endblock %}
+    </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='bower_components/tether/dist/css/tether.min.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='styles.css') }}?q=128054970" rel="stylesheet">
+
+    {% block css %}{% endblock %}
+
+</head>
+
+<body>
 
 {% block navbar %}
     <nav class="navbar navbar-default">
@@ -59,3 +76,16 @@
         {% block app_content %}{% endblock %}
     </div>
 {% endblock %}
+
+</body>
+
+
+<!-- Bootstrap core JavaScript -->
+
+<script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='bower_components/tether/dist/js/tether.min.js') }}"></script>
+<script src="{{ url_for('static', filename='bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='bower_components/popper.js/dist/popper.js') }}"></script>
+{% block js %}{% endblock %}
+
+</html>
