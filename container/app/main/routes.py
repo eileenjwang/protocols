@@ -11,6 +11,7 @@ from app import csrf
 import re
 from pprint import pprint
 import unidecode
+import uuid
 
 class DataTree:
 
@@ -103,9 +104,11 @@ class DataTree:
             is_root_leaf = False
             is_leaf = False
             is_terminal_leaf = False
+            is_child_leaf = False
 
             if is_parent_leaf:
                 is_leaf = True
+                is_child_leaf = True
             elif DataTree.is_leaf(key, node_data):
                 is_leaf = True
                 is_root_leaf = True
@@ -153,7 +156,9 @@ class DataTree:
                 'leaf_type': leaf_type,
                 'leaf_content': leaf_content,
                 'is_root_leaf': is_root_leaf,
-                'is_terminal_leaf': is_terminal_leaf
+                'is_terminal_leaf': is_terminal_leaf,
+                # 'html_id': uuid.uuid4(),
+                'is_child_leaf': is_child_leaf,
             }
             return node
 
