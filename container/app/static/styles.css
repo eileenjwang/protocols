@@ -16,3 +16,7 @@ margin-bottom: 1rem;
   content: "|";
 }
 
+.protocol-form fieldset .form-group {
+  /*border-left: 2px solid #eee;*/
+  margin-left: 30px;
+}

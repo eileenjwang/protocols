@@ -172,6 +172,16 @@ class DynamicForm(FlaskForm):
         setattr(cls, name, field)
         return cls
 
+
+class DynamicDictForm(FlaskForm):
+    class Meta:
+        crsf = False
+
+    @classmethod
+    def append_field(cls, name, field):
+        setattr(cls, name, field)
+        return cls
+
 # def FormFactory(name, argnames, BaseClass=DynamicForm):
 #     def __init__(self, **kwargs):
 #         for key, value in kwargs.items():
@@ -270,24 +280,40 @@ class DataNode:
             content = None
 
             if node.leaf_type == 'str' or node.leaf_type == 'bool':
-                form_field_info.append(
+                # define form attribute (field)
+                DynamicForm.append_field(attr, TextField(node.label, validators=[DataRequired()]))
+
+            elif node.leaf_type == 'dict':
+                for child in node.children:
+                    child_attr = camelify(child.label)
+                    DynamicDictForm.append_field(child_attr, TextField(child.label, validators=[DataRequired()]))
+                DynamicForm.append_field(attr, FormField(DynamicDictForm))
+            
+            form_field_info.append(
                 {
                     'node': node,
                     'attr': attr,
                     # 'content': content,
                     # 'field_obj': field_obj
                 })
+        DynamicForm.append_field('submit', SubmitField('Soumettre'))
 
-                # define form attribute (field)
-                DynamicForm.append_field(attr, TextField(node.label, validators=[DataRequired()]))
-
+        # submit = SubmitField('Soumettre')
         form = DynamicForm()
 
         # define field values
         for field_d in form_field_info:
             attr = field_d['attr']
             node = field_d['node']
-            getattr(form, attr).data = node.leaf_content
+            if node.leaf_type == 'str' or node.leaf_type == 'bool':
+                getattr(form, attr).data = node.leaf_content
+
+            elif node.leaf_type == 'dict':
+                for child in node.children:
+                    child_attr = camelify(child.label)
+                    print('** dict data', getattr(getattr(form, attr), child_attr))
+                    getattr(getattr(form, attr), child_attr).data = child.leaf_content
+
         return form
 
 def get_json_data():
@@ -399,6 +425,8 @@ def edit_protocols(id):
         print('Fields: ')
         for field in form:
             print(field)
+        print(form.data)
+
         # for node, field_attribute in form_field_info:
         #     field = getattr(form, field_attribute)
         #     field.data = node.leaf_content
