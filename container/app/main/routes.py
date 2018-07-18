@@ -255,7 +255,7 @@ def edit_profile():
     return render_template('edit_profile.html', title='Modifier votre profil',
                            form=form)
 
-@bp.route('/edit_protocols/<int:id>', methods=['GET', 'POST'])
+@bp.route('/edit_protocols/<id>', methods=['GET', 'POST'])
 @csrf.exempt
 @login_required
 def edit_protocols(id):
