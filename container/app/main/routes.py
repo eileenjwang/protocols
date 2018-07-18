@@ -37,8 +37,6 @@ class DataTree:
               node_id = node['id'],
               node_content = children_content
             )
-
-        # print(content)
         return content
 
     @staticmethod
@@ -221,69 +219,15 @@ class DataTree:
 @login_required
 @csrf.exempt
 def index():
-    conn = sql.connect('protocols.db', timeout=10)
-    c = conn.cursor()
-    # create table
-    c.execute('CREATE TABLE IF NOT EXISTS Protocols (version_id INTEGER PRIMARY KEY, user, timestamp, JSON_text TEXT)')
-    file = 'data.json'
-    with open(file) as f:
-        json_file = f.read()
-    #data = json.loads(json_file)
-    #textfile = json.dumps(data)
-    now = str(datetime.datetime.now())
-    user = str(current_user)
-    #c.execute("INSERT INTO Protocols (user, timestamp, JSON_text) VALUES (?,?,?)",
-            #(user, now, json_file,))
-    # Save (commit) the changes
-    conn.commit()
-    # close connection
-    conn.close()
-
     with sql.connect("protocols.db") as con:
         cur = con.cursor()
         cur.execute("SELECT JSON_text FROM Protocols ORDER BY version_id DESC LIMIT 1")
         rows = cur.fetchall()
 
-    import uuid
-    count = 0
-    dicts_all = []
-    data = json.loads(rows[0][0])
-    for k1, v1 in data['IRM'].items():
-        dict_1 = dict(name= k1, id= uuid.uuid4(), list=[])
-        for k2, v2 in v1.items():
-            dict_2 = dict(name=k2, id= uuid.uuid4(), list=[])
-            dict_1['list'].append(dict_2)
-            for k3, v3 in v2.items():
-                dict_3 = dict(name=k3, id= uuid.uuid4(), list=[])
-                dict_2['list'].append(dict_3)
-                for k4, v4 in v3.items():
-                    dict_4 = dict(name=k4, id= uuid.uuid4(), list=[])
-                    dict_3['list'].append(dict_4)
-                    for k5, v5 in v4.items():
-                        count +=1
-                        dict_5 = dict(name=k5, id= count, list=[])
-                        dict_4['list'].append(dict_5)
-                        for k6, v6 in v5.items():
-                            dict_6 = dict(name=k6, id= uuid.uuid4(), list=[])
-                            if isinstance(v6, (str, int, bool)):
-                                dict_6['list'].append(v6)
-                                dict_5['list'].append(dict_6)
-                            if isinstance(v6, dict):
-                                for k7, v7 in v6.items():
-                                    dict_7 = dict(name=k7, id= uuid.uuid4(), list=[])
-                                    dict_6['list'].append(dict_7)
-                                    dict_7['list'].append(v7)
-                                dict_5['list'].append(dict_6)
-                            if isinstance(v6, list):
-                                for element in v6:
-                                    for key1, value1 in element.items():
-                                        dict_7 = dict(name=key1, id= uuid.uuid4(), list=[])
-                                        dict_6['list'].append(dict_7)
-                                        dict_7['list'].append(value1)
-                                dict_5['list'].append(dict_6)
+    json_data = json.loads(rows[0][0])
+    tree_obj = DataTree(json_data)
 
-        dicts_all.append(dict_1)
-    return render_template('index.html', title='Accueil', dicts_all=dicts_all)
+    return render_template('index.html', title='Accueil', data=tree_obj.tree)
 
 
 @bp.route('/user/<username>')
