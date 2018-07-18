@@ -161,7 +161,7 @@ class DataTree:
     @staticmethod
     def is_leaf(key, value):
         """
-        Predefined manner to determine if node is leaf (can be changed if we decided to change the schema in the future).
+        Predefined manner to determine if node is leaf (can be changed if we decide to change the schema in the future).
         """
 
         rvalue = isinstance(value, dict) and len(value.items()) > 1 and 'SALLE' in key
