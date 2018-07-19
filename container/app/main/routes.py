@@ -77,6 +77,8 @@ class DataTree:
                                    ]
         """
        
+        # first survey
+
         level = root_level
         for key, node_data in json_data.items():
             keys = list(keys)
@@ -290,7 +292,8 @@ class DataNode:
     def get_form(self, fill_data=False, form_prefix=''):
         form_field_info = []
 
-        for node in self.children:
+        priority = { 'str': 0, 'bool': 1, 'dict': 2, 'list': 3 }
+        for node in sorted(self.children, key=lambda x: priority[x.leaf_type]):
             field_label = node.label
             attr = camelify(field_label)
             field_id = slugify(field_label)
@@ -335,9 +338,7 @@ class DataNode:
                     # 'content': content,
                     # 'field_obj': field_obj
                 })
-        DynamicForm.append_field('submit', SubmitField('Soumettre'))
 
-        # submit = SubmitField('Soumettre')
         form = DynamicForm()
 
         # define field values
