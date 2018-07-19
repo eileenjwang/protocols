@@ -12,19 +12,20 @@ import re
 from pprint import pprint
 import unidecode
 import uuid
-from wtforms import StringField, SubmitField, TextField, FormField, FieldList
+from wtforms import StringField, SubmitField, TextField, FormField, FieldList, RadioField
 from wtforms.validators import ValidationError, DataRequired
 from flask_wtf import FlaskForm
+
 
 class DataTree:     
 
     def __init__(self, json_data):  
         self.json_data = json_data
         self.index = {}
-        self.root = DataTree.json_to_graph(self.json_data, parent=None, tree=self)
+        self.root = DataTree.json_to_graph(self.json_data, parent=None, tree=self, keys=[])
 
     @staticmethod
-    def json_to_graph(json_data, root_level=0, is_parent_leaf=False, prefix='', parent=None, tree=None):
+    def json_to_graph(json_data, root_level=0, is_parent_leaf=False, prefix='', parent=None, tree=None, keys=[]):
         """Converts json object into graph object that is easier to traverse and output in template.
 
         Args:
@@ -78,6 +79,9 @@ class DataTree:
        
         level = root_level
         for key, node_data in json_data.items():
+            keys = list(keys)
+            keys.append(key)
+
             node_id = '{prefix}_{level}-{slug}'.format(
                 prefix=prefix, 
                 level=level,
@@ -101,7 +105,6 @@ class DataTree:
                     leaf_content = node_data
                     is_terminal_leaf = True
 
-
             node_kwargs = {
                 'id': node_id,
                 'parent': parent,
@@ -114,7 +117,8 @@ class DataTree:
                 'is_terminal_leaf': is_terminal_leaf,
                 # 'html_id': uuid.uuid4(),
                 'is_child_leaf': is_child_leaf,
-                'tree': tree
+                'tree': tree,
+                'keys': keys
             }
             node = DataNode(**node_kwargs)
 
@@ -130,7 +134,8 @@ class DataTree:
                             prefix=node_id,
                             is_parent_leaf=is_leaf,
                             parent=node,
-                            tree=tree
+                            tree=tree,
+                            keys=keys,
                         )
                     )
 
@@ -144,7 +149,8 @@ class DataTree:
                             is_parent_leaf=is_leaf,
                             prefix=node_id,
                             parent=node,
-                            tree=tree
+                            tree=tree,
+                            keys=keys
                         )
                     )
 
@@ -169,7 +175,8 @@ class DynamicForm(FlaskForm):
 
     @classmethod
     def append_field(cls, name, field):
-        setattr(cls, name, field)
+        if not hasattr(cls, name):
+            setattr(cls, name, field)
         return cls
 
 
@@ -179,26 +186,10 @@ class DynamicDictForm(FlaskForm):
 
     @classmethod
     def append_field(cls, name, field):
-        setattr(cls, name, field)
+        if not hasattr(cls, name):
+            setattr(cls, name, field)
+        # setattr(cls, name, field)
         return cls
-
-# def FormFactory(name, argnames, BaseClass=DynamicForm):
-#     def __init__(self, **kwargs):
-#         for key, value in kwargs.items():
-#             # here, the argnames variable is the one passed to the
-#             # ClassFactory call
-#             if key not in argnames:
-#                 raise TypeError("Argument %s not valid for %s" 
-#                     % (key, self.__class__.__name__))
-#             setattr(self, key, value)
-#             value.bind(self, key)
-#             print('setting attribute', key, value)
-
-#         BaseClass.__init__(self)
-
-#     newclass = type(name, (BaseClass,),{"__init__": __init__})
-#     newclass.meta = None
-#     return newclass
 
 class DataNode:
 
@@ -214,7 +205,8 @@ class DataNode:
             is_root_leaf = False,
             is_terminal_leaf = False,
             is_child_leaf = False,
-            tree = None
+            tree = None,
+            keys = [],
             ):
         self.parent = parent
         self.id = id
@@ -228,29 +220,55 @@ class DataNode:
         self.is_terminal_leaf = is_terminal_leaf
         self.is_child_leaf = is_child_leaf
         self.tree = tree
+        self.keys = keys
+        self.index = {}
+        self.form_classes = {}
+
         if tree:
             tree.index[id] = self
 
     def __str__(self):
         return DataNode.node_to_str(self.tree)
 
-    def to_dict(self):
+    def to_dict(self, form=None):
         """TODO"""
-        d = {self.label: {}}
+        if not form:
+            form, _ = self.get_form(fill_data=True)
 
-    @staticmethod
-    def node_to_dict(node):
-        """TODO"""
-        if not node.is_leaf:
-            subdict = {}
-            for child in node.children:
-                subdict[child.label] = DataNode.node_to_dict(child)
-            return subdict
-        else:
-            if len(node.children) == 0:
-                d = {node.label : node.leaf_content}
-                return d
-            # TODO handle the rest...
+        def rebuild(node, index):
+            if isinstance(node, str):
+                pass
+
+            elif isinstance(node, dict):
+                nodes = list(node.items())
+                for key, val in nodes:
+                    if key not in index.keys():
+                        del node[key]
+                        continue
+
+                    new_key = index[key]
+                    if new_key != key:
+                        node[new_key] = val
+                        del node[key]
+
+                    if val == 'Oui':
+                        node[new_key] = True
+                    elif val == 'Non':
+                        node[new_key] = False
+                    else:
+                        rebuild(val, index)
+
+            elif isinstance(node, list):
+                for item in node:
+                    rebuild(item, index)
+
+        d = dict(form.data.items())
+        rebuild(d, self.index)
+        return d
+
+    def get_key_path(self):
+        return self.keys
+
    
     @staticmethod
     def node_to_str(node, level=0):
@@ -270,35 +288,57 @@ class DataNode:
             )
         return content
 
-    def get_form(self):
-        form_field_info = []
 
+    def get_form_class_for_attr(self, attr, form_prefix=''):
+        class_name = form_prefix + attr + 'Class'
+
+        if class_name not in self.form_classes.keys():
+            form_class = type(class_name, (DynamicDictForm,), {})
+        
+        self.form_classes[attr] = form_class
+        return form_class
+
+
+    def get_form(self, fill_data=False, form_prefix=''):
+        form_field_info = []
 
         for node in self.children:
             field_label = node.label
             attr = camelify(field_label)
+            field_id = slugify(field_label)
             sub_form_class = None
             content = None
 
-            if node.leaf_type == 'str' or node.leaf_type == 'bool':
+            self.index[attr] = field_label
+
+            if node.leaf_type == 'str':
                 # define form attribute (field)
-                DynamicForm.append_field(attr, TextField(node.label, validators=[DataRequired()]))
+                DynamicForm.append_field(attr, TextField(node.label, validators=[DataRequired()], id=field_id))
+            if node.leaf_type == 'bool':
+                DynamicForm.append_field(attr, RadioField(choices=[(True, 'Oui'), (False, 'Non')], id=field_id))
 
             elif node.leaf_type == 'dict':
-                sub_form_class = type(attr + 'Class', (DynamicDictForm,), {})
+                sub_form_class = self.get_form_class_for_attr(attr)
+                # sub_form_class = type(attr + 'Class', (DynamicDictForm,), {})
                 for child in node.children:
                     child_attr = camelify(child.label)
-                    sub_form_class.append_field(child_attr, TextField(child.label, validators=[DataRequired()]))
-                DynamicForm.append_field(attr, FormField(sub_form_class))
+                    self.index[child_attr] = child.label
+                    child_field_id = slugify(child.label)
+                    sub_form_class.append_field(child_attr, TextField(child.label, validators=[DataRequired()], id=child_field_id))
+                DynamicForm.append_field(attr, FormField(sub_form_class, id=field_id))
             
             elif node.leaf_type == 'list':
                 first_list = node.children[0]
-                sub_form_class = type(attr + 'ListClass', (DynamicDictForm,), {})
+                sub_form_class = self.get_form_class_for_attr(attr)
+
                 for child in first_list.children:
                     child_attr = camelify(child.label)
-                    sub_form_class.append_field(child_attr, TextField(child.label, validators=[DataRequired()]))
-                DynamicForm.append_field(attr, FieldList(FormField(sub_form_class)))
+                    self.index[child_attr] = child.label
+                    child_field_id = slugify(child.label)
+                    sub_form_class.append_field(child_attr, TextField(child.label, validators=[DataRequired()], id=child_field_id))
+                DynamicForm.append_field(attr, FieldList(FormField(sub_form_class, id=field_id)))
             
+
             form_field_info.append(
                 {
                     'node': node,
@@ -313,29 +353,43 @@ class DataNode:
         form = DynamicForm()
 
         # define field values
-        for field_d in form_field_info:
-            attr = field_d['attr']
-            node = field_d['node']
-            sub_form_class = field_d['sub_form_class']
-            if node.leaf_type == 'str' or node.leaf_type == 'bool':
-                getattr(form, attr).data = node.leaf_content
+        if fill_data:
+            for field_d in form_field_info:
+                attr = field_d['attr']
+                node = field_d['node']
+                sub_form_class = field_d['sub_form_class']
+                if node.leaf_type == 'str':
+                    getattr(form, attr).data = node.leaf_content
+                if node.leaf_type == 'bool':
+                    if node.leaf_content == 'Oui':
+                        getattr(form, attr).data = True
+                    elif node.leaf_content == 'Non':
+                        getattr(form, attr).data = False
+                    elif node.leaf_content in [True, False]:
+                        getattr(form, attr).data = node.leaf_content
 
-            elif node.leaf_type == 'dict':
-                for child in node.children:
-                    child_attr = camelify(child.label)
-                    print('** dict data', getattr(getattr(form, attr), child_attr))
-                    getattr(getattr(form, attr), child_attr).data = child.leaf_content
-
-            elif node.leaf_type == 'list':
-                for node_list in node.children:
-                    child_form = sub_form_class()
-                    for child in node_list.children:
+                elif node.leaf_type == 'dict':
+                    for child in node.children:
                         child_attr = camelify(child.label)
-                        setattr(child_form, child_attr, child.leaf_content)
-                        # getattr(child_form, child_attr).data = child.leaf_content
-                    getattr(form, attr).append_entry(child_form)
+                        getattr(getattr(form, attr), child_attr).data = child.leaf_content
 
-        return form
+                elif node.leaf_type == 'list':
+                    field_list = getattr(form, attr)
+                    create_entries = len(field_list.entries) == 0
+                    
+                    for i, node_list in enumerate(node.children):
+                        child_form = sub_form_class()
+                        for child in node_list.children:
+                            child_attr = camelify(child.label)
+                            setattr(child_form, child_attr, child.leaf_content)
+                        if create_entries:
+                            print('Create entry', i)
+                            field_list.append_entry(child_form)
+                        # else:
+                        #     print('No need to create entry', i)
+                        #     field_list.entries[i] = child_form
+
+        return (form, index)
 
 def get_json_data():
     with sql.connect("protocols.db") as con:
@@ -432,43 +486,58 @@ def edit_profile():
                            form=form)
 
 @bp.route('/edit_protocols/<id>', methods=['GET', 'POST'])
-@csrf.exempt
 @login_required
+@csrf.exempt
 def edit_protocols(id):
 
     json_data = get_json_data()
     tree_obj = DataTree(json_data)
 
     form_node = tree_obj.index[id]
+    title = 'Modifier protocole {}'.format(form_node.label)
 
     if request.method == 'GET':
-        form = form_node.get_form()
-        print('Fields: ')
-        for field in form:
-            print(field)
-        print(form.data)
+        form, _ = form_node.get_form(fill_data=True)
+        
+        return render_template('edit_protocols.html', form=form, title=title)
 
-        # for node, field_attribute in form_field_info:
-        #     field = getattr(form, field_attribute)
-        #     field.data = node.leaf_content
+    elif request.method == 'POST':
+        form, _ = form_node.get_form(fill_data=False)
 
-    # if request.method == 'POST': #and form.validate()#
-    #     pass
-    #     # del form.submit
-    #     # data.get('IRM', {}).get(contents[1], {}).get(contents[2], {}).get(contents[3], {}).get(contents[4], {}).get(contents[5]).update(form.data)
-    #     # textfile = json.dumps(data)
-    #     # now = str(datetime.datetime.now())
-    #     # user = str(current_user)
-    #     # con = sql.connect("protocols.db")
-    #     # cur = con.cursor()
-    #     # cur.execute("INSERT INTO Protocols (user, timestamp, JSON_text) VALUES (?,?,?)",
-    #     #     (user, now, textfile,))
-    #     # con.commit()
-    #     # con.close()
-    #     # flash('Vos changements ont été enregistrés.')
-    #     # return redirect(url_for('main.index'))
+        new_json_subdata = form_node.to_dict(form=form)
 
-    title = 'Modifier protocole {}'.format(form_node.label)
-    return render_template('edit_protocols.html', form=form, title=title)
-    # return render_template('index.html', title='Form ' + form_node['label'], protocols=[form_node])
+        keys = form_node.get_key_path()
 
+        # d = {'a': {'b': 'c'}}
+        # keys = ('a','b')
+        new_json_data = dict(json_data.items())
+        # print new_json_data
+        d = new_json_data
+        for k in keys[:-1]:
+            d = d[k]
+        d[keys[-1]] = new_json_subdata
+
+
+
+        # new_json_data = get_json_data() # remove this later
+        new_tree_obj = DataTree(new_json_data)
+        new_form_node = new_tree_obj.index[id]
+        new_form, _ = new_form_node.get_form(fill_data=True, form_prefix='Test')
+
+
+        flash('Vos changements ont été enregistrés.')
+        return render_template('edit_protocols.html', form=new_form, title=title)
+
+
+        # with sql.connect("protocols.db") as con:
+        #     cur = con.cursor()
+        #     textfile = json.dumps(new_json_data)
+        #     now = str(datetime.datetime.now())
+        #     user = str(current_user)
+        #     cur.execute("INSERT INTO Protocols (user, timestamp, JSON_text) VALUES (?,?,?)",
+        #         (user, now, textfile,))
+        #     con.commit()
+
+        # flash('Vos changements ont été enregistrés.')
+        # return render_template('edit_protocols.html', form=form, title=title)
+        # return redirect(url_for('main.index'))
