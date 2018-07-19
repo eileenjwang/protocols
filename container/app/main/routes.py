@@ -1,21 +1,21 @@
 from flask import render_template, flash, redirect, url_for, request, g, current_app
 from flask_login import current_user, login_required
-from app import db
-from app.main.forms import EditProfileForm, EditProtocolsForm, sub_Séquences
-from app.models import User
-from app.main import bp
+
 import sqlite3 as sql
 import json
 import datetime, time
-from app import csrf
 import re
-from pprint import pprint
 import unidecode
-import uuid
-from wtforms import StringField, SubmitField, TextField, FormField, FieldList, RadioField
-from wtforms.validators import ValidationError, DataRequired
-from flask_wtf import FlaskForm
 
+from app import db
+from app.models import User
+from app.main import bp
+from app import csrf
+
+
+from flask_wtf import FlaskForm
+from wtforms import SubmitField, TextField, FormField, FieldList, RadioField
+from wtforms.validators import DataRequired
 
 class DataTree:     
 
