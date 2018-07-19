@@ -2,7 +2,7 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-  <h1>Bonjour, {{ current_user.username }}.</h1>
+  <h1>Protocoles </h1>
   <br>
 
 <div class="row">
@@ -31,7 +31,6 @@
 								<li><span class='form-label'>{{child.label}}</span>: {{child.leaf_content}}</li>
 						{% endfor %}
 						</ul>
-
 					{% else %}
 						<p>Houston, we have a problem. {{node.leaf_type}}</p>
 					{% endif %}
@@ -39,16 +38,16 @@
 			 <div class="card {% if node.is_root_leaf %}root-leaf{% endif %}">
 			 	 <div class="card-header">
 		        <p>
-		          <a data-toggle="collapse" href="#{{node.id}}" class="collapsed">
+		          <a data-toggle="collapse" href="#{{node.id}}" class="accordion-link collapsed">
 		            {{node.label}}
 		          </a>
 		          {% if node.is_root_leaf %}
-		           <a class="btn btn-light btn-sm float-right" href="{{ url_for('main.edit_protocols', id = node.id) }}">Modifier</a>
+		           <a class="edit-btn btn btn-light btn-sm float-right" href="{{ url_for('main.edit_protocols', id = node.id) }}">Modifier</a>
 			        {% endif %}
 		        </p>
-		          
+
 		      </div>
-		      <div id="{{node.id}}" class="card-body">
+		      <div id="{{node.id}}" class="card-body collapse">
 							{{loop(node.children)}}
 					</div><!-- / end panel-collapse -->
 				</div> <!-- / end panel-group -->
