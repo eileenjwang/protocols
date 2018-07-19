@@ -164,31 +164,20 @@ class DataTree:
         rvalue = isinstance(value, dict) and len(value.items()) > 1 and 'SALLE' in key
         return rvalue
 
-# class BaseClass(object):
-#     def __init__(self, classtype):
-#         self._type = classtype
-
-class DynamicForm(FlaskForm):
-    class Meta:
-        crsf = False
-
+class BaseForm(object):
     @classmethod
     def append_field(cls, name, field):
         if not hasattr(cls, name):
             setattr(cls, name, field)
         return cls
 
-
-class DynamicDictForm(FlaskForm):
+class DynamicForm(FlaskForm, BaseForm):
     class Meta:
         crsf = False
 
-    @classmethod
-    def append_field(cls, name, field):
-        if not hasattr(cls, name):
-            setattr(cls, name, field)
-        # setattr(cls, name, field)
-        return cls
+class DynamicChildForm(FlaskForm, BaseForm):
+    class Meta:
+        crsf = False
 
 class DataNode:
 
@@ -292,7 +281,7 @@ class DataNode:
         class_name = form_prefix + attr + 'Class'
 
         if class_name not in self.form_classes.keys():
-            form_class = type(class_name, (DynamicDictForm,), {})
+            form_class = type(class_name, (DynamicChildForm,), {})
         
         self.form_classes[attr] = form_class
         return form_class
@@ -318,7 +307,7 @@ class DataNode:
 
             elif node.leaf_type == 'dict':
                 sub_form_class = self.get_form_class_for_attr(attr)
-                # sub_form_class = type(attr + 'Class', (DynamicDictForm,), {})
+                # sub_form_class = type(attr + 'Class', (DynamicForm,), {})
                 for child in node.children:
                     child_attr = camelify(child.label)
                     self.index[child_attr] = child.label
