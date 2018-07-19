@@ -115,7 +115,6 @@ class DataTree:
                 'leaf_content': leaf_content,
                 'is_root_leaf': is_root_leaf,
                 'is_terminal_leaf': is_terminal_leaf,
-                # 'html_id': uuid.uuid4(),
                 'is_child_leaf': is_child_leaf,
                 'tree': tree,
                 'keys': keys
@@ -505,39 +504,24 @@ def edit_protocols(id):
         form, _ = form_node.get_form(fill_data=False)
 
         new_json_subdata = form_node.to_dict(form=form)
-
         keys = form_node.get_key_path()
 
-        # d = {'a': {'b': 'c'}}
-        # keys = ('a','b')
+        # update subset of json_data and build new_json_data
         new_json_data = dict(json_data.items())
-        # print new_json_data
         d = new_json_data
         for k in keys[:-1]:
             d = d[k]
         d[keys[-1]] = new_json_subdata
 
-
-
-        # new_json_data = get_json_data() # remove this later
-        new_tree_obj = DataTree(new_json_data)
-        new_form_node = new_tree_obj.index[id]
-        new_form, _ = new_form_node.get_form(fill_data=True, form_prefix='Test')
-
+        # save new version to db
+        with sql.connect("protocols.db") as con:
+            cur = con.cursor()
+            json_str = json.dumps(new_json_data)
+            now = str(datetime.datetime.now())
+            user = str(current_user)
+            cur.execute("INSERT INTO Protocols (user, timestamp, JSON_text) VALUES (?,?,?)",
+                (user, now, json_str,))
+            con.commit()
 
         flash('Vos changements ont été enregistrés.')
-        return render_template('edit_protocols.html', form=new_form, title=title)
-
-
-        # with sql.connect("protocols.db") as con:
-        #     cur = con.cursor()
-        #     textfile = json.dumps(new_json_data)
-        #     now = str(datetime.datetime.now())
-        #     user = str(current_user)
-        #     cur.execute("INSERT INTO Protocols (user, timestamp, JSON_text) VALUES (?,?,?)",
-        #         (user, now, textfile,))
-        #     con.commit()
-
-        # flash('Vos changements ont été enregistrés.')
-        # return render_template('edit_protocols.html', form=form, title=title)
-        # return redirect(url_for('main.index'))
+        return redirect(url_for('main.index'))
