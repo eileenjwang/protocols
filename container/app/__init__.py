@@ -10,6 +10,10 @@ from flask_bootstrap import Bootstrap
 from config import Config
 from flask_wtf.csrf import CSRFProtect
 
+import sqlite3 as sql
+import json
+import datetime
+
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
@@ -24,10 +28,7 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
     csrf.init_app(app)
 
-
     app.jinja_env.add_extension('jinja2.ext.loopcontrols')
-
-
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -43,6 +44,8 @@ def create_app(config_class=Config):
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
+
+    from app.main.utils import get_json_data
 
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:
@@ -74,6 +77,34 @@ def create_app(config_class=Config):
         app.logger.setLevel(logging.INFO)
         app.logger.info('Protocols startup')
 
+    # Create protocols database if it does not exist
+    with sql.connect(app.config.get('PROTOCOLS_DB')) as con:
+        cur = con.cursor()
+        sql_query = "SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}';".format(table_name='Protocols')
+        cur.execute(sql_query)
+        rows = cur.fetchall()
+
+        # if table does not exist or is empty, (create it and) populate it with init_data.json
+        if len(rows) == 0 or get_json_data(app) is None:
+            cur.execute('CREATE TABLE IF NOT EXISTS Protocols (version_id INTEGER PRIMARY KEY, user, timestamp, JSON_text TEXT)')
+
+            json_data_fn = os.path.join(app.config.get('ROOT_DIR'), 'data', 'init_data.json')
+            print(json_data_fn)
+            if not os.path.exists(json_data_fn):
+                print('Unable to populate db with initial json...')
+
+            else:
+
+                with open(json_data_fn, 'r') as f:
+                    json_data = json.load(f)
+
+                json_str = json.dumps(json_data)
+                now = str(datetime.datetime.now())
+                user = 'Original Data'
+
+                cur.execute("INSERT INTO Protocols (user, timestamp, JSON_text) VALUES (?,?,?)",
+                    (user, now, json_str,))
+                con.commit()
     return app
 
 from app import models
