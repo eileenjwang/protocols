@@ -1,5 +1,7 @@
 import re
 import unidecode
+import sqlite3 as sql
+import json
 
 def camelify(s):
     """
@@ -53,3 +55,14 @@ def slugify(s):
     s = unidecode.unidecode(s)
 
     return s
+
+def get_json_data(app):
+    with sql.connect(app.config.get('PROTOCOLS_DB')) as con:
+        cur = con.cursor()
+        cur.execute("SELECT JSON_text FROM Protocols ORDER BY version_id DESC LIMIT 1")
+        rows = cur.fetchall()
+
+    if len(rows) == 0 or len(rows[0]) == 0:
+        return None
+
+    return json.loads(rows[0][0])

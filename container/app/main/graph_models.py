@@ -277,7 +277,7 @@ class DataNode:
             if node.leaf_type == 'str':
                 # define form attribute (field)
                 DynamicForm.append_field(attr, TextField(node.label, validators=[DataRequired()], id=field_id))
-            if node.leaf_type == 'bool':
+            elif node.leaf_type == 'bool':
                 DynamicForm.append_field(attr, RadioField(choices=[(True, 'Oui'), (False, 'Non')], id=field_id))
 
             elif node.leaf_type == 'dict':

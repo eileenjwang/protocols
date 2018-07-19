@@ -10,13 +10,7 @@ from app.models import User
 from app.main import bp
 from app import csrf
 from app.main.graph_models import DataTree
-
-def get_json_data():
-    with sql.connect(current_app.config.get('PROTOCOLS_DB')) as con:
-        cur = con.cursor()
-        cur.execute("SELECT JSON_text FROM Protocols ORDER BY version_id DESC LIMIT 1")
-        rows = cur.fetchall()
-    return json.loads(rows[0][0])
+from app.main.utils import get_json_data
 
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index/', methods=['GET', 'POST'])
@@ -24,7 +18,7 @@ def get_json_data():
 @csrf.exempt
 def index():
     
-    json_data = get_json_data()
+    json_data = get_json_data(current_app)
     tree_obj = DataTree(json_data)
 
     return render_template('index.html', title='Accueil', protocols=[tree_obj.root])
@@ -56,7 +50,7 @@ def edit_profile():
 @csrf.exempt
 def edit_protocols(id):
 
-    json_data = get_json_data()
+    json_data = get_json_data(current_app)
     tree_obj = DataTree(json_data)
 
     form_node = tree_obj.index[id]
