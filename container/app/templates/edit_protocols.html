@@ -1,23 +1,81 @@
 {% extends "base.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
-
 {% block title %}
 Modifier protocoles
 {% endblock %}
 
 
+
+
 {% block app_content %}
 
-<h1>{{title}}</h1>
+<h3 class="form-title">{{title}}</h3>
 
-<form class="form protocol-form" method="post" role="form">
-    {{ wtf.quick_form(form, form_type='horizontal') }}
-    <!-- {{ form.hidden_tag() }}
-    {{ wtf.form_errors(form, hiddens="only") }} 
+<form class="protocol-form" method="post" role="form">
+    {{ form.hidden_tag() }}
     {% for field in form %}
-        {{wtf.form_field(field, class="form-control form-inline")}}
-    {% endfor %} -->
-<!-- <button type="submit" class="btn btn-primary mb-2">Submit </button> -->
+        {% if field.type == 'TextField' %}
+         <div class="form-group row">
+            {% if field.widget.input_type != 'hidden' %}
+                {{field.label(class_="col-md-3 col-sm-6 col-10 col-form-label")}}
+            {% endif %}
+            {{field(class_="form-control col-md-9 col-sm-6 col-10")}}
+        </div>
+        {% elif field.type == 'FormField' %}
+            <div class="card" >
+                <div class="card-header">
+                    {{field.name}}
+                </div>
+                  <div class="card-body">
+                    
+                    <div class="subform col-12">
+                    {% for subfield in field %}
+                        <div class="form-group row">
+                        {% if subfield.widget.input_type != 'hidden' %}
+                            {{subfield.label(class_="col-3 subform-label")}}
+                        {% endif %}
+                        {{subfield(class_="form-control col-9 subform-control")}}
+                        </div>
+                    {% endfor %}
+                    </div>
+                  </div>
+            </div>
+            <!-- <h5 class="field-title">{{field.name}}</h5> -->
+            
+
+        {% elif field.type == 'FieldList' %}
+            <div class="card" >
+                <div class="card-header">
+                    {{field.name}}
+                </div>
+                  <div class="card-body">
+                    
+                    <div class="subform col-12">
+                    {% for entry in field.entries %}
+                        <div class="form-group row list-field-item">
+                        <div class="col-12">
+                        {% for subfield in entry %}
+                            {% if subfield.widget.input_type != 'hidden' %}
+                                {{subfield.label(class_="col-md-2 col-12 col subform-label col-form-label")}}
+                                {{subfield(class_="col-md-3 col-12 form-control subform-control")}}
+                                <!-- <div class="col-1"></div> -->
+                            {% else %}
+                                {{subfield}}
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                        </div>
+                        <div class="w-100"></div>
+                    {% endfor %}
+                    </div>
+                  </div>
+            </div>
+        {% else %}
+            <!-- {{field.type}} -->
+        {% endif %}
+    {% endfor %}
+    <button class="btn btn-primary mb-2" id="submit" name="submit" value="Soumettre" type="submit">Soumettre</button>
+    <!-- <button type="submit" class="btn btn-primary mb-2">Submit </button> -->
 </form>
 {% endblock %}

@@ -1,10 +1,14 @@
-/* Add custom styles here */
-
+ /* Add custom styles here */
+.navbar {
+  margin-bottom: 20px;
+}
 .card-header p {
 margin-bottom: 0;
 }
 
-.protocols .card.root-leaf {
+/* Index styling */
+
+.protocols .card {
 margin-bottom: 1rem;
 }
 
@@ -16,7 +20,72 @@ margin-bottom: 1rem;
   content: "|";
 }
 
-.protocol-form fieldset .form-group {
-  /*border-left: 2px solid #eee;*/
+.protocols .edit-btn {
+  background: #f7f7f7;
+}
+
+.protocols a.accordion-link {
+  color: #333;
+}
+
+/* Protocol form styling*/
+
+.protocol-form {
+  margin-bottom: 30px;
+}
+
+.form-control {
+font-size: 0.8rem;
+}
+
+.protocol-form .card-body {
+padding: 0;
+}
+
+.protocol-form .card-header {
+padding: 10px 15px;
+}
+
+.form-title {
+  margin-bottom: 20px;
+}
+
+.protocol-form label,
+.protocol-for input {
+  font-size: 0.8rem;
+}
+
+.protocol-form .field-title {
+  /*padding-left: 15px;*/
+  margin-top: 10px;
+}
+
+.protocol-form .subform-label,
+.protocol-form .subform-control {
+  margin-top: 10px;
+}
+
+
+.protocol-form .card {
+  margin-bottom: 20px;
+}
+
+.protocol-form .list-field-item label,
+.protocol-form .list-field-item .form-control {
+  float: left;
+  display: block;
+  margin-right: 30px;
+}
+
+/*.protocol-form .subform {
+  border: 1px solid #eee;
+  border-radius: 5px;
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 10px 30px;
+}*/
+
+/*.protocol-form fieldset .form-group {
+  border-left: 2px solid #eee;
   margin-left: 30px;
 }
