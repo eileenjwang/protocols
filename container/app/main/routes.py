@@ -12,7 +12,7 @@ from app import csrf
 from app.main.graph_models import DataTree
 
 def get_json_data():
-    with sql.connect("protocols.db") as con:
+    with sql.connect(current_app.config.get('PROTOCOLS_DB')) as con:
         cur = con.cursor()
         cur.execute("SELECT JSON_text FROM Protocols ORDER BY version_id DESC LIMIT 1")
         rows = cur.fetchall()
@@ -81,7 +81,7 @@ def edit_protocols(id):
         d[keys[-1]] = new_json_subdata
 
         # save new version to db
-        with sql.connect("protocols.db") as con:
+        with sql.connect(current_app.config.get('PROTOCOLS_DB')) as con:
             cur = con.cursor()
             json_str = json.dumps(new_json_data)
             now = str(datetime.datetime.now())

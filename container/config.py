@@ -16,3 +16,5 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['your-email@example.com']
     TEMPLATES_AUTO_RELOAD = True
+
+    PROTOCOLS_DB = os.path.join(basedir, 'data', 'protocols.db')
