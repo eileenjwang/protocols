@@ -18,3 +18,4 @@ class Config(object):
     TEMPLATES_AUTO_RELOAD = True
 
     PROTOCOLS_DB = os.path.join(basedir, 'data', 'protocols.db')
+    ROOT_DIR = basedir
