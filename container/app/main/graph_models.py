@@ -4,9 +4,9 @@ from wtforms.validators import DataRequired
 
 from app.main.utils import slugify, camelify
 
-class DataTree:     
+class DataTree:
 
-    def __init__(self, json_data):  
+    def __init__(self, json_data):
         self.json_data = json_data
         self.index = {}
         self.root = DataTree.json_to_graph(self.json_data, parent=None, tree=self, keys=[])
@@ -20,13 +20,13 @@ class DataTree:
 
         Returns:
             json_tree (list): list of nodes (dict) of the form
-                [ 
+                [
                     {
-                        'id': <str>, 
-                        'label': <str>, 
+                        'id': <str>,
+                        'label': <str>,
                         'level': <int>,
-                        'children': <list>, 
-                        'is_leaf': <bool>, 
+                        'children': <list>,
+                        'is_leaf': <bool>,
                         'leaf_type': <str>,
                         'leaf_content': <str>
                     },
@@ -36,16 +36,16 @@ class DataTree:
                     id (str): unique to the node
                     label (str): the node label (corresponds to dictionary key)
                     children (list): list of child nodes
-                    is_leaf (bool): True if node correponds to the level that must be output in form format 
+                    is_leaf (bool): True if node correponds to the level that must be output in form format
                         (not necessarily the last level of the dict), False if corresponds to accordion header
                     leaf_type (str): One of ['str', 'bool', 'list', 'dict', None]
                         None if is_leaf is False
                         Examples of (key, value) pairs according to leaf_type:
-                            'str': 
+                            'str':
                                 "Antenne": "head coil"
                             'bool':
                                 "Implantation": true
-                            'dict': 
+                            'dict':
                                 "Injection": {
                                     "aucune": true,
                                     "pré_scan": false,
@@ -63,7 +63,7 @@ class DataTree:
                                     }
                                    ]
         """
-       
+
         # first survey
 
         level = root_level
@@ -72,7 +72,7 @@ class DataTree:
             keys.append(key)
 
             node_id = '{prefix}_{level}-{slug}'.format(
-                prefix=prefix, 
+                prefix=prefix,
                 level=level,
                 slug=slugify(key))
             node_id = node_id.strip('_')
@@ -91,7 +91,7 @@ class DataTree:
             if is_leaf:
                 leaf_type = type(node_data).__name__
                 if isinstance(node_data, bool) or isinstance(node_data, str):
-                    leaf_content = node_data
+                    leaf_content = str(node_data)
                     is_terminal_leaf = True
 
             node_kwargs = {
@@ -117,8 +117,8 @@ class DataTree:
                     child_dict = {child_key: child_node_data}
                     children.append(
                         DataTree.json_to_graph(
-                            child_dict, 
-                            root_level=level+1, 
+                            child_dict,
+                            root_level=level+1,
                             prefix=node_id,
                             is_parent_leaf=is_leaf,
                             parent=node,
@@ -132,8 +132,8 @@ class DataTree:
                     child_dict = { 'list' : child_node_data}
                     children.append(
                         DataTree.json_to_graph(
-                            child_dict, 
-                            root_level=level+1, 
+                            child_dict,
+                            root_level=level+1,
                             is_parent_leaf=is_leaf,
                             prefix=node_id,
                             parent=node,
@@ -155,10 +155,10 @@ class DataTree:
 
 class DataNode:
 
-    def __init__(self, 
-            parent=None, 
-            id='0', 
-            label='Unknown', 
+    def __init__(self,
+            parent=None,
+            id='0',
+            label='Unknown',
             level=0,
             children = [],
             is_leaf = False,
@@ -193,7 +193,6 @@ class DataNode:
         return DataNode.node_to_str(self.tree)
 
     def to_dict(self, form=None):
-        """TODO"""
         if not form:
             form, _ = self.get_form(fill_data=True)
 
@@ -213,10 +212,11 @@ class DataNode:
                         node[new_key] = val
                         del node[key]
 
-                    if val == 'Oui':
-                        node[new_key] = True
-                    elif val == 'Non':
-                        node[new_key] = False
+                    if isinstance(val, str):
+                        if val in ['Oui', 'oui', 'true', 'True']:
+                            node[new_key] = True
+                        elif val in ['Non', 'non', 'false', 'False']:
+                            node[new_key] = False
                     else:
                         rebuild(val, index)
 
@@ -231,7 +231,7 @@ class DataNode:
     def get_key_path(self):
         return self.keys
 
-   
+
     @staticmethod
     def node_to_str(node, level=0):
         if node.is_leaf and (node.leaf_type == 'str' or node.leaf_type == 'bool'):
@@ -256,7 +256,7 @@ class DataNode:
 
         if class_name not in self.form_classes.keys():
             form_class = type(class_name, (DynamicChildForm,), {})
-        
+
         self.form_classes[attr] = form_class
         return form_class
 
@@ -274,11 +274,9 @@ class DataNode:
 
             self.index[attr] = field_label
 
-            if node.leaf_type == 'str':
+            if node.leaf_type == 'str' or node.leaf_type == 'bool':
                 # define form attribute (field)
                 DynamicForm.append_field(attr, TextField(node.label, validators=[DataRequired()], id=field_id))
-            elif node.leaf_type == 'bool':
-                DynamicForm.append_field(attr, RadioField(choices=[(True, 'Oui'), (False, 'Non')], id=field_id))
 
             elif node.leaf_type == 'dict':
                 sub_form_class = self.get_form_class_for_attr(attr)
@@ -289,7 +287,7 @@ class DataNode:
                     child_field_id = slugify(child.label)
                     sub_form_class.append_field(child_attr, TextField(child.label, validators=[DataRequired()], id=child_field_id))
                 DynamicForm.append_field(attr, FormField(sub_form_class, id=field_id))
-            
+
             elif node.leaf_type == 'list':
                 first_list = node.children[0]
                 sub_form_class = self.get_form_class_for_attr(attr)
@@ -300,7 +298,7 @@ class DataNode:
                     child_field_id = slugify(child.label)
                     sub_form_class.append_field(child_attr, TextField(child.label, validators=[DataRequired()], id=child_field_id))
                 DynamicForm.append_field(attr, FieldList(FormField(sub_form_class, id=field_id)))
-            
+
 
             form_field_info.append(
                 {
@@ -319,15 +317,12 @@ class DataNode:
                 attr = field_d['attr']
                 node = field_d['node']
                 sub_form_class = field_d['sub_form_class']
+
                 if node.leaf_type == 'str':
                     getattr(form, attr).data = node.leaf_content
-                if node.leaf_type == 'bool':
-                    if node.leaf_content == 'Oui':
-                        getattr(form, attr).data = True
-                    elif node.leaf_content == 'Non':
-                        getattr(form, attr).data = False
-                    elif node.leaf_content in [True, False]:
-                        getattr(form, attr).data = node.leaf_content
+
+                elif node.leaf_type == 'bool':
+                    getattr(form, attr).data = str(node.leaf_content)
 
                 elif node.leaf_type == 'dict':
                     for child in node.children:
@@ -337,20 +332,20 @@ class DataNode:
                 elif node.leaf_type == 'list':
                     field_list = getattr(form, attr)
                     create_entries = len(field_list.entries) == 0
-                    
+
                     for i, node_list in enumerate(node.children):
                         child_form = sub_form_class()
                         for child in node_list.children:
                             child_attr = camelify(child.label)
                             setattr(child_form, child_attr, child.leaf_content)
                         if create_entries:
-                            print('Create entry', i)
+                            # print('Create entry', i)
                             field_list.append_entry(child_form)
                         # else:
                         #     print('No need to create entry', i)
                         #     field_list.entries[i] = child_form
 
-        return (form, self.index)
+        return form
 
 class BaseForm(object):
     @classmethod
