@@ -1,128 +1,84 @@
-2018-06-19 14:26:08,028 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-06-19 14:27:27,507 ERROR: Exception on /auth/register [POST] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
+2018-07-18 23:27:54,518 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:75]
+2018-07-18 23:33:35,995 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:75]
+2018-07-18 23:57:14,767 ERROR: Exception on /edit_protocols/0-irm_1-neuroradiologie_2-cerveau_3-ischemie_4-scanner_5-salle-a-ge-1-5t [GET] [in /Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
-    context)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/engine/default.py", line 508, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such table: users
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
     raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/app/auth/routes.py", line 41, in register
-    if form.validate_on_submit():
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_wtf/form.py", line 101, in validate_on_submit
-    return self.is_submitted() and self.validate()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/wtforms/form.py", line 310, in validate
-    return super(Form, self).validate(extra)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/wtforms/form.py", line 152, in validate
-    if not field.validate(self, extra):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/wtforms/fields/core.py", line 206, in validate
-    stop_validation = self._run_validation_chain(form, chain)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/wtforms/fields/core.py", line 226, in _run_validation_chain
-    validator(form, self)
-  File "/Users/eileenwang/protocols/app/auth/forms.py", line 24, in validate_username
-    user = User.query.filter_by(username=username.data).first()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/orm/query.py", line 2835, in first
-    ret = list(self[0:1])
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/orm/query.py", line 2627, in __getitem__
-    return list(res)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/orm/query.py", line 2935, in __iter__
-    return self._execute_and_instances(context)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/orm/query.py", line 2958, in _execute_and_instances
-    result = conn.execute(querycontext.statement, self._params)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 948, in execute
-    return meth(self, multiparams, params)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/sql/elements.py", line 269, in _execute_on_connection
-    return connection._execute_clauseelement(self, multiparams, params)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1060, in _execute_clauseelement
-    compiled_sql, distilled_params
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1200, in _execute_context
-    context)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1413, in _handle_dbapi_exception
-    exc_info
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/util/compat.py", line 203, in raise_from_cause
-    reraise(type(exception), exception, tb=exc_tb, cause=cause)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/util/compat.py", line 186, in reraise
-    raise value.with_traceback(tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
-    context)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/sqlalchemy/engine/default.py", line 508, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: users [SQL: 'SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.password_hash AS users_password_hash \nFROM users \nWHERE users.username = ?\n LIMIT ? OFFSET ?'] [parameters: ('eileen', 1, 0)] (Background on this error at: http://sqlalche.me/e/e3q8)
-2018-06-19 14:28:18,559 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-06-19 14:30:09,555 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-06-19 14:30:13,178 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-06-19 14:30:21,990 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-06-19 14:30:29,236 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-06-19 14:30:39,285 ERROR: Exception on /auth/login [POST] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/app/auth/routes.py", line 22, in login
-    login_user(user, remember=form.remember_me.data)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 158, in login_user
-    if not force and not user.is_active:
-AttributeError: 'User' object has no attribute 'is_active'
-2018-06-19 14:31:23,177 ERROR: Exception on /auth/login [POST] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/app/auth/routes.py", line 22, in login
-    login_user(user, remember=form.remember_me.data)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 158, in login_user
-    if not force and not user.is_active:
-AttributeError: 'User' object has no attribute 'is_active'
-2018-06-19 14:34:23,309 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-06-19 14:34:34,120 ERROR: Exception on /index [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/Users/eileenwang/protocols/app/main/routes.py", line 13, in index
-    return render_template('index.html', title='Home', posts=posts)
-NameError: name 'posts' is not defined
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/main/routes.py", line 488, in edit_protocols
+    return render_template('edit_protocols.html', form=form, title=title)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/templating.py", line 135, in render_template
+    context, ctx.app)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/templating.py", line 117, in _render
+    rv = template.render(context)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/templates/edit_protocols.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/templates/base.html", line 65, in top-level template code
+    {% block content %}
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/templates/base.html", line 76, in block "content"
+    {% block app_content %}{% endblock %}
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/templates/edit_protocols.html", line 13, in block "app_content"
+    {{ wtf.form_errors(form, hiddens="only") }}
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/environment.py", line 430, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'wtf' is undefined
+2018-07-18 23:57:18,437 ERROR: Exception on /edit_protocols/0-irm_1-neuroradiologie_2-cerveau_3-ischemie_4-scanner_5-salle-a-ge-1-5t [GET] [in /Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/main/routes.py", line 488, in edit_protocols
+    return render_template('edit_protocols.html', form=form, title=title)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/templating.py", line 135, in render_template
+    context, ctx.app)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/templating.py", line 117, in _render
+    rv = template.render(context)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/templates/edit_protocols.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/templates/base.html", line 65, in top-level template code
+    {% block content %}
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/templates/base.html", line 76, in block "content"
+    {% block app_content %}{% endblock %}
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/templates/edit_protocols.html", line 13, in block "app_content"
+    {{ wtf.form_errors(form, hiddens="only") }}
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/environment.py", line 430, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'wtf' is undefined

@@ -1,48 +1,68 @@
-2018-07-10 09:07:41,881 ERROR: Exception on /index/ [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
+2018-07-19 10:25:35,510 ERROR: Exception on /edit_protocols/0-irm_1-neuroradiologie_2-cerveau_3-ischemie_4-scanner_5-salle-a-ge-1-5t [GET] [in /Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
     raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/Users/eileenwang/protocols/app/main/routes.py", line 22, in index
-    cur.execute("SELECT JSON_text FROM Protocols ORDER BY version_id DESC LIMIT 1")
-sqlite3.OperationalError: no such table: Protocols
-2018-07-10 09:08:38,464 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:74]
-2018-07-10 09:08:40,912 ERROR: Exception on /index/ [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/main/routes.py", line 61, in edit_protocols
+    form = form_node.get_form(fill_data=True)
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/main/graph_models.py", line 315, in get_form
+    form = DynamicForm()
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/wtforms/form.py", line 212, in __call__
+    return type.__call__(cls, *args, **kwargs)
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask_wtf/form.py", line 88, in __init__
+    super(FlaskForm, self).__init__(formdata=formdata, **kwargs)
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/wtforms/form.py", line 278, in __init__
+    self.process(formdata, obj, data=data, **kwargs)
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/wtforms/form.py", line 132, in process
+    field.process(formdata)
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/wtforms/fields/core.py", line 818, in process
+    self.form = self.form_class(formdata=formdata, obj=data, prefix=prefix)
+TypeError: 'str' object is not callable
+2018-07-19 10:26:36,202 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:78]
+2018-07-19 10:26:38,488 ERROR: Exception on /edit_protocols/0-irm_1-neuroradiologie_2-cerveau_3-ischemie_4-scanner_5-salle-a-ge-1-5t [GET] [in /Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
     raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/Users/eileenwang/protocols/app/main/routes.py", line 22, in index
-    cur.execute("SELECT JSON_text FROM Protocols ORDER BY version_id DESC LIMIT 1")
-sqlite3.OperationalError: no such table: Protocols
-2018-07-10 09:10:44,363 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:74]
-2018-07-16 01:12:34,904 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:79]
-2018-07-17 10:24:53,715 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/app/__init__.py:79]
-2018-07-17 10:58:00,414 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/app/__init__.py:79]
-2018-07-17 17:17:34,770 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/app/__init__.py:75]
-2018-07-17 17:18:06,192 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/app/__init__.py:75]
-2018-07-17 17:18:26,702 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/app/__init__.py:75]
-2018-07-17 17:18:27,147 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/app/__init__.py:75]
-2018-07-18 00:32:27,755 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:75]
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/main/routes.py", line 59, in edit_protocols
+    form = form_node.get_form(fill_data=True)
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/main/graph_models.py", line 315, in get_form
+    form = DynamicForm()
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/wtforms/form.py", line 212, in __call__
+    return type.__call__(cls, *args, **kwargs)
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/flask_wtf/form.py", line 88, in __init__
+    super(FlaskForm, self).__init__(formdata=formdata, **kwargs)
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/wtforms/form.py", line 278, in __init__
+    self.process(formdata, obj, data=data, **kwargs)
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/wtforms/form.py", line 132, in process
+    field.process(formdata)
+  File "/Users/eleyine/virtualenvs/LWProtocols/lib/python3.6/site-packages/wtforms/fields/core.py", line 818, in process
+    self.form = self.form_class(formdata=formdata, obj=data, prefix=prefix)
+TypeError: 'str' object is not callable
+2018-07-19 10:29:17,499 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:78]
+2018-07-20 11:11:07,920 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:78]
+2018-07-20 11:13:58,792 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:78]
+2018-07-20 11:14:56,943 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:78]
+2018-07-20 11:30:00,695 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:78]

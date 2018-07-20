@@ -1,120 +1,112 @@
-2018-07-03 15:36:02,249 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
+2018-07-19 00:43:06,469 ERROR: Exception on /edit_protocols/0-irm_1-neuroradiologie_2-cerveau_3-ischemie_4-scanner_5-salle-a-ge-1-5t [GET] [in /Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
     raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/Users/eileenwang/protocols/app/main/routes.py", line 27, in index
-    for k1, v1 in data['IRM'].items():
-TypeError: list indices must be integers or slices, not str
-2018-07-03 15:36:27,292 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:36:28,797 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/main/routes.py", line 488, in edit_protocols
+    return render_template('edit_protocols.html', form=form, title=title)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/templating.py", line 134, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/environment.py", line 869, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/environment.py", line 830, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/environment.py", line 804, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/loaders.py", line 125, in load
+    code = environment.compile(source, name, filename)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/environment.py", line 591, in compile
+    self.handle_exception(exc_info, source_hint=source_hint)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/templates/edit_protocols.html", line 32, in template
+    {% endfor }
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 883, in subparse
+    rv = self.parse_statement()
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 130, in parse_statement
+    return getattr(self, 'parse_' + self.stream.current.value)()
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 268, in parse_block
+    node.body = self.parse_statements(('name:endblock',), drop_needle=True)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 165, in parse_statements
+    result = self.subparse(end_tokens)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 883, in subparse
+    rv = self.parse_statement()
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 130, in parse_statement
+    return getattr(self, 'parse_' + self.stream.current.value)()
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 199, in parse_for
+    body = self.parse_statements(('name:endfor', 'name:else'))
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 165, in parse_statements
+    result = self.subparse(end_tokens)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 883, in subparse
+    rv = self.parse_statement()
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 130, in parse_statement
+    return getattr(self, 'parse_' + self.stream.current.value)()
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 223, in parse_if
+    drop_needle=True)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 165, in parse_statements
+    result = self.subparse(end_tokens)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 883, in subparse
+    rv = self.parse_statement()
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 130, in parse_statement
+    return getattr(self, 'parse_' + self.stream.current.value)()
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 199, in parse_for
+    body = self.parse_statements(('name:endfor', 'name:else'))
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 165, in parse_statements
+    result = self.subparse(end_tokens)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 883, in subparse
+    rv = self.parse_statement()
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 130, in parse_statement
+    return getattr(self, 'parse_' + self.stream.current.value)()
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/parser.py", line 200, in parse_for
+    if next(self.stream).value == 'endfor':
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/lexer.py", line 359, in __next__
+    self.current = next(self._iter)
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/lexer.py", line 562, in wrap
+    for lineno, token, value in stream:
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/jinja2/lexer.py", line 683, in tokeniter
+    filename)
+jinja2.exceptions.TemplateSyntaxError: unexpected '}'
+2018-07-19 01:37:35,056 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:75]
+2018-07-19 01:38:44,756 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:75]
+2018-07-19 01:41:18,200 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:75]
+2018-07-19 02:09:41,876 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:75]
+2018-07-19 02:09:55,626 ERROR: Exception on /edit_protocols/0-irm_1-neuroradiologie_2-cerveau_3-ischemie_4-scanner_5-salle-a-ge-1-5t [GET] [in /Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
     raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+  File "/Users/eleyine/virtualenvs/Protocols/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/Users/eileenwang/protocols/app/main/routes.py", line 28, in index
-    for k1, v1 in data['IRM'].items():
-TypeError: list indices must be integers or slices, not str
-2018-07-03 15:37:28,092 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:37:29,560 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/eileenwang/protocols/app/main/routes.py", line 29, in index
-    for k1, v1 in data['IRM'].items():
-TypeError: list indices must be integers or slices, not str
-2018-07-03 15:40:40,145 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:40:43,134 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/eileenwang/protocols/app/main/routes.py", line 21, in index
-    cur.execute("SELECT JSON_text FROM Protocoles ORDER BY version_id DESC LIMIT 1")
-sqlite3.OperationalError: no such table: Protocoles
-2018-07-03 15:41:06,741 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:41:08,031 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/eileenwang/protocols/app/main/routes.py", line 24, in index
-    dict(data)
-ValueError: dictionary update sequence element #0 has length 1; 2 is required
-2018-07-03 15:41:29,712 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
-2018-07-03 15:41:31,491 ERROR: Exception on / [GET] [in /Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/eileenwang/protocols/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/eileenwang/protocols/app/main/routes.py", line 24, in index
-    dict(data)
-ValueError: dictionary update sequence element #0 has length 1; 2 is required
-2018-07-03 15:41:53,109 INFO: Protocols startup [in /Users/eileenwang/protocols/app/__init__.py:69]
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/main/routes.py", line 66, in edit_protocols
+    form, _ = form_node.get_form(fill_data=True)
+  File "/Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/main/graph_models.py", line 353, in get_form
+    return (form, index)
+NameError: name 'index' is not defined
+2018-07-19 02:11:31,659 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:75]
+2018-07-19 02:17:33,422 INFO: Protocols startup [in /Users/eleyine/Dropbox/Coursework/Med/Extracurriculars/ProtocolsEileen/container/app/__init__.py:75]
