@@ -15,7 +15,7 @@ Modifier protocoles
 <form class="protocol-form" method="post" role="form">
     {{ form.hidden_tag() }}
     {% for field in form %}
-        {% if field.type == 'TextField' %}
+        {% if field.type == 'TextField' or field.type == 'RadioField'%}
          <div class="form-group row">
             {% if field.widget.input_type != 'hidden' %}
                 {{field.label(class_="col-md-3 col-sm-6 col-10 col-form-label")}}

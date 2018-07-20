@@ -41,7 +41,7 @@
 		          <a data-toggle="collapse" href="#{{node.id}}" class="accordion-link collapsed">
 		            {{node.label}}
 		          </a>
-		          {% if node.is_root_leaf %}
+		          {% if node.is_root_leaf and not current_user.is_anonymous %}
 		           <a class="edit-btn btn btn-light btn-sm float-right" href="{{ url_for('main.edit_protocols', id = node.id) }}">Modifier</a>
 			        {% endif %}
 		        </p>

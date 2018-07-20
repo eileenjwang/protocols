@@ -14,10 +14,10 @@ from app.main.utils import get_json_data
 
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index/', methods=['GET', 'POST'])
-@login_required
+# @login_required
 @csrf.exempt
 def index():
-    
+
     json_data = get_json_data(current_app)
     tree_obj = DataTree(json_data)
 
@@ -42,8 +42,7 @@ def edit_profile():
         return redirect(url_for('main.edit_profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username
-    return render_template('edit_profile.html', title='Modifier votre profil',
-                           form=form)
+    return render_template('edit_profile.html', title='Modifier votre profil', form=form)
 
 @bp.route('/edit_protocols/<id>', methods=['GET', 'POST'])
 @login_required
@@ -57,12 +56,12 @@ def edit_protocols(id):
     title = 'Modifier protocole {}'.format(form_node.label)
 
     if request.method == 'GET':
-        form, _ = form_node.get_form(fill_data=True)
-        
+        form = form_node.get_form(fill_data=True)
+
         return render_template('edit_protocols.html', form=form, title=title)
 
     elif request.method == 'POST':
-        form, _ = form_node.get_form(fill_data=False)
+        form = form_node.get_form(fill_data=False)
 
         new_json_subdata = form_node.to_dict(form=form)
         keys = form_node.get_key_path()
