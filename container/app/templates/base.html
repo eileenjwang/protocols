@@ -48,8 +48,8 @@
             {% if current_user.is_anonymous %}
             <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Se connecter</a></li>
             {% else %}
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('main.user', username=current_user.username) }}">Profil</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">Se déconnecter</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('main.user', username=current_user.username) }}">{{current_user.username}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">(déconnexion)</a></li>
             {% endif %}
         </ul>
     </div>
