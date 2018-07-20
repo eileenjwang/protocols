@@ -1,0 +1,400 @@
+{
+ "IRM": {
+  "Neuroradiologie": {
+   "CERVEAU": {
+    "ISCHÉMIE": {
+     "Scanner": {
+      "SALLE A:: GE 1.5T": {
+       "Implantation": true,
+       "InstallationPatient": {
+        "Durée": "00:07:00"
+       },
+       "Antenne": "head coil",
+       "Séquences": [
+        {
+         "Nom": "T1 AXIAL",
+         "Durée": "00:03:45"
+        },
+        {
+         "Nom": "FLAIR AXIAL",
+         "Durée": "00:04:02"
+        }
+       ],
+       "Injection": {
+        "aucune": true,
+        "pré_scan": false,
+        "per_scan": false
+       },
+       "Protocole_machine": {},
+       "Durée_acquisition": "Séquences.Durée.Sum()",
+       "Durée_examen": "Sum(Durée_acquisition, InstallationPatient.Durée)",
+       "Durée_bloc_irm": "Durée bloc IRM selon Durée_examen",
+       "Date_création": "01-01-2017",
+       "Date_dernière_modification": "01-02-2017",
+       "Auteur": "fg",
+       "Statut": {
+        "Production": false
+       }
+      },
+      "SALLE B:: Philips 3.0T": {
+       "Implantation": true,
+       "InstallationPatient": {
+        "Durée": "00:07:00"
+       },
+       "Antenne": "head coil",
+       "Séquences": [
+        {
+         "Nom": "T1 AXIAL",
+         "Durée": "00:03:45"
+        },
+        {
+         "Nom": "FLAIR AXIAL",
+         "Durée": "00:04:02"
+        }
+       ],
+       "Injection": {
+        "aucune": true,
+        "pré_scan": false,
+        "per_scan": false
+       },
+       "Protocole_machine": {},
+       "Durée_acquisition": "Séquences.Durée.Sum()",
+       "Durée_examen": "Sum(Durée_acquisition, InstallationPatient.Durée)",
+       "Durée_bloc_irm": "Durée bloc IRM selon Durée_examen",
+       "Date_création": "01-01-2017",
+       "Date_dernière_modification": "01-02-2017",
+       "Auteur": "fg",
+       "Statut": {
+        "Production": false
+       }
+      },
+      "SALLE C:: Siemens 1.5T": {
+       "Implantation": true,
+       "InstallationPatient": {
+        "Durée": "00:07:00"
+       },
+       "Antenne": "head coil",
+       "Séquences": [
+        {
+         "Nom": "T1 AXIAL",
+         "Durée": "00:03:45"
+        },
+        {
+         "Nom": "FLAIR AXIAL",
+         "Durée": "00:04:02"
+        }
+       ],
+       "Injection": {
+        "aucune": true,
+        "pré_scan": false,
+        "per_scan": false
+       },
+       "Protocole_machine": {},
+       "Durée_acquisition": "Séquences.Durée.Sum()",
+       "Durée_examen": "Sum(Durée_acquisition, InstallationPatient.Durée)",
+       "Durée_bloc_irm": "Durée bloc IRM selon Durée_examen",
+       "Date_création": "01-01-2017",
+       "Date_dernière_modification": "01-02-2017",
+       "Auteur": "fg",
+       "Statut": {
+        "Production": false
+       }
+      },
+      "SALLE D:: Philips 3.0T": {
+       "Implantation": true,
+       "InstallationPatient": {
+        "Durée": "00:07:00"
+       },
+       "Antenne": "head coil",
+       "Séquences": [
+        {
+         "Nom": "T1 AXIAL",
+         "Durée": "00:03:45"
+        },
+        {
+         "Nom": "FLAIR AXIAL",
+         "Durée": "00:04:02"
+        }
+       ],
+       "Injection": {
+        "aucune": true,
+        "pré_scan": false,
+        "per_scan": false
+       },
+       "Protocole_machine": {},
+       "Durée_acquisition": "Séquences.Durée.Sum()",
+       "Durée_examen": "Sum(Durée_acquisition, InstallationPatient.Durée)",
+       "Durée_bloc_irm": "Durée bloc IRM selon Durée_examen",
+       "Date_création": "01-01-2017",
+       "Date_dernière_modification": "01-02-2017",
+       "Auteur": "fg",
+       "Statut": {
+        "Production": false
+       }
+      },
+      "SALLE E:: Philips 3.0T": {
+       "Implantation": true,
+       "InstallationPatient": {
+        "Durée": "00:07:00"
+       },
+       "Antenne": "head coil",
+       "Séquences": [
+        {
+         "Nom": "T1 AXIAL",
+         "Durée": "00:03:45"
+        },
+        {
+         "Nom": "FLAIR AXIAL",
+         "Durée": "00:04:02"
+        }
+       ],
+       "Injection": {
+        "aucune": true,
+        "pré_scan": false,
+        "per_scan": false
+       },
+       "Protocole_machine": {},
+       "Durée_acquisition": "Séquences.Durée.Sum()",
+       "Durée_examen": "Sum(Durée_acquisition, InstallationPatient.Durée)",
+       "Durée_bloc_irm": "Durée bloc IRM selon Durée_examen",
+       "Date_création": "01-01-2017",
+       "Date_dernière_modification": "01-02-2017",
+       "Auteur": "fg",
+       "Statut": {
+        "Production": false
+       }
+      },
+      "SALLE F:: GE 1.5T": {
+       "Implantation": true,
+       "InstallationPatient": {
+        "Durée": "00:07:00"
+       },
+       "Antenne": "head coil",
+       "Séquences": [
+        {
+         "Nom": "T1 AXIAL",
+         "Durée": "00:03:45"
+        },
+        {
+         "Nom": "FLAIR AXIAL",
+         "Durée": "00:04:02"
+        }
+       ],
+       "Injection": {
+        "aucune": true,
+        "pré_scan": false,
+        "per_scan": false
+       },
+       "Protocole_machine": {},
+       "Durée_acquisition": "Séquences.Durée.Sum()",
+       "Durée_examen": "Sum(Durée_acquisition, InstallationPatient.Durée)",
+       "Durée_bloc_irm": "Durée bloc IRM selon Durée_examen",
+       "Date_création": "01-01-2017",
+       "Date_dernière_modification": "01-02-2017",
+       "Auteur": "fg",
+       "Statut": {
+        "Production": false
+       }
+      }
+     }
+    },
+    "SELLE TURCIQUE C-/C+": {
+     "Scanner": {
+      "SALLE A:: GE 1.5T": {
+       "Implantation": true,
+       "InstallationPatient": {
+        "Durée": "00:07:00"
+       },
+       "Antenne": "head coil",
+       "Séquences": [
+        {
+         "Nom": "T1 AXIAL",
+         "Durée": "00:03:45"
+        },
+        {
+         "Nom": "FLAIR AXIAL",
+         "Durée": "00:04:02"
+        }
+       ],
+       "Injection": {
+        "aucune": true,
+        "pré_scan": false,
+        "per_scan": false
+       },
+       "Protocole_machine": {},
+       "Durée_acquisition": "Séquences.Durée.Sum()",
+       "Durée_examen": "Sum(Durée_acquisition, InstallationPatient.Durée)",
+       "Durée_bloc_irm": "Durée bloc IRM selon Durée_examen",
+       "Date_création": "01-01-2017",
+       "Date_dernière_modification": "01-02-2017",
+       "Auteur": "fg",
+       "Statut": {
+        "Production": false
+       }
+      },
+      "SALLE B:: Philips 3.0T": {
+       "Implantation": true,
+       "InstallationPatient": {
+        "Durée": "00:07:00"
+       },
+       "Antenne": "head coil",
+       "Séquences": [
+        {
+         "Nom": "T1 AXIAL",
+         "Durée": "00:03:45"
+        },
+        {
+         "Nom": "FLAIR AXIAL",
+         "Durée": "00:04:02"
+        }
+       ],
+       "Injection": {
+        "aucune": true,
+        "pré_scan": false,
+        "per_scan": false
+       },
+       "Protocole_machine": {},
+       "Durée_acquisition": "Séquences.Durée.Sum()",
+       "Durée_examen": "Sum(Durée_acquisition, InstallationPatient.Durée)",
+       "Durée_bloc_irm": "Durée bloc IRM selon Durée_examen",
+       "Date_création": "01-01-2017",
+       "Date_dernière_modification": "01-02-2017",
+       "Auteur": "fg",
+       "Statut": {
+        "Production": false
+       }
+      },
+      "SALLE C:: Siemens 1.5T": {
+       "Implantation": true,
+       "InstallationPatient": {
+        "Durée": "00:07:00"
+       },
+       "Antenne": "head coil",
+       "Séquences": [
+        {
+         "Nom": "T1 AXIAL",
+         "Durée": "00:03:45"
+        },
+        {
+         "Nom": "FLAIR AXIAL",
+         "Durée": "00:04:02"
+        }
+       ],
+       "Injection": {
+        "aucune": true,
+        "pré_scan": false,
+        "per_scan": false
+       },
+       "Protocole_machine": {},
+       "Durée_acquisition": "Séquences.Durée.Sum()",
+       "Durée_examen": "Sum(Durée_acquisition, InstallationPatient.Durée)",
+       "Durée_bloc_irm": "Durée bloc IRM selon Durée_examen",
+       "Date_création": "01-01-2017",
+       "Date_dernière_modification": "01-02-2017",
+       "Auteur": "fg",
+       "Statut": {
+        "Production": false
+       }
+      },
+      "SALLE D:: Philips 3.0T": {
+       "Implantation": true,
+       "InstallationPatient": {
+        "Durée": "00:07:00"
+       },
+       "Antenne": "head coil",
+       "Séquences": [
+        {
+         "Nom": "T1 AXIAL",
+         "Durée": "00:03:45"
+        },
+        {
+         "Nom": "FLAIR AXIAL",
+         "Durée": "00:04:02"
+        }
+       ],
+       "Injection": {
+        "aucune": true,
+        "pré_scan": false,
+        "per_scan": false
+       },
+       "Protocole_machine": {},
+       "Durée_acquisition": "Séquences.Durée.Sum()",
+       "Durée_examen": "Sum(Durée_acquisition, InstallationPatient.Durée)",
+       "Durée_bloc_irm": "Durée bloc IRM selon Durée_examen",
+       "Date_création": "01-01-2017",
+       "Date_dernière_modification": "01-02-2017",
+       "Auteur": "fg",
+       "Statut": {
+        "Production": false
+       }
+      },
+      "SALLE E:: Philips 3.0T": {
+       "Implantation": true,
+       "InstallationPatient": {
+        "Durée": "00:07:00"
+       },
+       "Antenne": "head coil",
+       "Séquences": [
+        {
+         "Nom": "T1 AXIAL",
+         "Durée": "00:03:45"
+        },
+        {
+         "Nom": "FLAIR AXIAL",
+         "Durée": "00:04:02"
+        }
+       ],
+       "Injection": {
+        "aucune": true,
+        "pré_scan": false,
+        "per_scan": false
+       },
+       "Protocole_machine": {},
+       "Durée_acquisition": "Séquences.Durée.Sum()",
+       "Durée_examen": "Sum(Durée_acquisition, InstallationPatient.Durée)",
+       "Durée_bloc_irm": "Durée bloc IRM selon Durée_examen",
+       "Date_création": "01-01-2017",
+       "Date_dernière_modification": "01-02-2017",
+       "Auteur": "fg",
+       "Statut": {
+        "Production": false
+       }
+      },
+      "SALLE F:: GE 1.5T": {
+       "Implantation": true,
+       "InstallationPatient": {
+        "Durée": "00:07:00"
+       },
+       "Antenne": "head coil",
+       "Séquences": [
+        {
+         "Nom": "T1 AXIAL",
+         "Durée": "00:03:45"
+        },
+        {
+         "Nom": "FLAIR AXIAL",
+         "Durée": "00:04:02"
+        }
+       ],
+       "Injection": {
+        "aucune": true,
+        "pré_scan": false,
+        "per_scan": false
+       },
+       "Protocole_machine": {},
+       "Durée_acquisition": "Séquences.Durée.Sum()",
+       "Durée_examen": "Sum(Durée_acquisition, InstallationPatient.Durée)",
+       "Durée_bloc_irm": "Durée bloc IRM selon Durée_examen",
+       "Date_création": "01-01-2017",
+       "Date_dernière_modification": "01-02-2017",
+       "Auteur": "fg",
+       "Statut": {
+        "Production": false
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}
