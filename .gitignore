@@ -11,4 +11,6 @@ dump.rdb
 /container/app/static/bower_components
 /container/logs
 
+/container/data/protocols.db
+
 .DS_Store
