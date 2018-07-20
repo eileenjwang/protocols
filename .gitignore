@@ -7,7 +7,8 @@ dump.rdb
 
 *.log
 
-/container/data
 /container/app/sandbox
 /container/app/static/bower_components
 /container/logs
+
+.DS_Store
