@@ -21,7 +21,7 @@ def index():
     tree_obj = DataTree(json_data)
     return render_template('index.html', title='Accueil', protocols=[tree_obj.root])
 
-@bp.route('/lookup', methods=['GET'])
+@bp.route('/api/lookup', methods=['GET'])
 def searchbar_lookup():
     json_data = get_json_data(current_app)
     tree_obj = DataTree(json_data)
@@ -32,7 +32,7 @@ def searchbar_lookup():
             key_path = node.get_key_path()
             # key_path[-1] = '<span class="last">' + key_path[-1] + '</span>'
             item = {
-                'value': '\\'.join(key_path),
+                'value': ' \\ '.join(key_path),
                 'id': node.id,
                 'url': url_for('main.view_protocols', id=node.id)
                  }

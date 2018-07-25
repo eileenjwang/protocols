@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-  $.getJSON( "/lookup", function( protocols ) {
+  $.getJSON( "/api/lookup", function( protocols ) {
 
     $('#protocols-autocomplete').autocomplete({
         lookup: protocols,
