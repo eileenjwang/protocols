@@ -8,7 +8,6 @@ dump.rdb
 *.log
 
 /container/app/sandbox
-/container/app/static/bower_components
 /container/logs
 
 /container/data/protocols.db
