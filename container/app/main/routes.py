@@ -117,7 +117,7 @@ def edit_protocols(id):
             cur = con.cursor()
             json_str = json.dumps(new_json_data)
             now = str(datetime.datetime.now())
-            user = str(current_user)
+            user = str(current_user.username)
             cur.execute("INSERT INTO Protocols (user, timestamp, JSON_text) VALUES (?,?,?)",
                 (user, now, json_str,))
             con.commit()
