@@ -10,7 +10,13 @@ Modifier protocoles
 
 {% block app_content %}
 
-<h3 class="form-title">{{title}}</h3>
+<ol class="breadcrumb">
+  {% for crumb in crumbs %}
+    <li class="breadcrumb-item {% if loop.last %}font-weight-bold{% endif %}">{{crumb}}</li>
+  {% endfor %}
+</ol>
+
+<h3 class="form-title">Modifier Protocole</h3>
 
 <form class="protocol-form" method="post" role="form">
     {{ form.hidden_tag() }}
@@ -28,7 +34,7 @@ Modifier protocoles
                     {{field.name}}
                 </div>
                   <div class="card-body">
-                    
+
                     <div class="subform col-12">
                     {% for subfield in field %}
                         <div class="form-group row">
@@ -42,7 +48,7 @@ Modifier protocoles
                   </div>
             </div>
             <!-- <h5 class="field-title">{{field.name}}</h5> -->
-            
+
 
         {% elif field.type == 'FieldList' %}
             <div class="card" >
@@ -50,7 +56,7 @@ Modifier protocoles
                     {{field.name}}
                 </div>
                   <div class="card-body">
-                    
+
                     <div class="subform col-12">
                     {% for entry in field.entries %}
                         <div class="form-group row list-field-item">

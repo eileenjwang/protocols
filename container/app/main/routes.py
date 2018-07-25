@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, request, g, current_app
+from flask import render_template, flash, redirect, url_for, request, g, current_app, jsonify
 from flask_login import current_user, login_required
 
 import sqlite3 as sql
@@ -17,12 +17,38 @@ from app.main.utils import get_json_data
 # @login_required
 @csrf.exempt
 def index():
-
     json_data = get_json_data(current_app)
     tree_obj = DataTree(json_data)
-
     return render_template('index.html', title='Accueil', protocols=[tree_obj.root])
 
+@bp.route('/lookup', methods=['GET'])
+def searchbar_lookup():
+    json_data = get_json_data(current_app)
+    tree_obj = DataTree(json_data)
+    protocols = [tree_obj.root]
+
+    def _searchbar_recursive_helper(protocol_list, node):
+        if node.is_root_leaf:
+            key_path = node.get_key_path()
+            # key_path[-1] = '<span class="last">' + key_path[-1] + '</span>'
+            item = {
+                'value': '\\'.join(key_path),
+                'id': node.id,
+                'url': url_for('main.view_protocols', id=node.id)
+                 }
+            return item
+
+        else:
+            if not node.is_leaf:
+                for child_node in node.children:
+                    item = _searchbar_recursive_helper(protocol_list, child_node)
+                    if item:
+                        protocol_list.append(item)
+
+    lookup_data = []
+    _searchbar_recursive_helper(lookup_data, tree_obj.root)
+    # print(json.dumps(lookup_data, indent=2))
+    return jsonify(lookup_data)
 
 @bp.route('/user/<username>')
 @login_required
@@ -44,6 +70,17 @@ def edit_profile():
         form.username.data = current_user.username
     return render_template('edit_profile.html', title='Modifier votre profil', form=form)
 
+
+@bp.route('/view_protocols/<id>', methods=['GET'])
+def view_protocols(id):
+    json_data = get_json_data(current_app)
+    tree_obj = DataTree(json_data)
+    node = tree_obj.index[id]
+    key_path = node.get_key_path()
+    protocol_title = " \\ ".join(key_path)
+
+    return render_template('view_protocols.html', protocols=[node], protocol_title=protocol_title, crumbs=key_path)
+
 @bp.route('/edit_protocols/<id>', methods=['GET', 'POST'])
 @login_required
 @csrf.exempt
@@ -55,10 +92,12 @@ def edit_protocols(id):
     form_node = tree_obj.index[id]
     title = 'Modifier protocole {}'.format(form_node.label)
 
+    key_path = form_node.get_key_path()
+
     if request.method == 'GET':
         form = form_node.get_form(fill_data=True)
 
-        return render_template('edit_protocols.html', form=form, title=title)
+        return render_template('edit_protocols.html', form=form, title=title, crumbs=key_path)
 
     elif request.method == 'POST':
         form = form_node.get_form(fill_data=False)

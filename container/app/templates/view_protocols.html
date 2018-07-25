@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+  <!-- <br> -->
+
+<div class="row">
+  <div class="col-12 protocols">
+
+	{% for node in protocols recursive %}
+		{% if node.is_child_leaf %}
+					{% if node.leaf_type == 'str' or node.leaf_type == 'bool' %}
+					<p><span class='form-label'>{{node.label}}</span>: {{node.leaf_content}}</p>
+
+					{% elif node.leaf_type == 'list' %}
+						<p class="form-title list"> {{node.label}} </p>
+						<ul>
+						{% for list in node.children %}
+							<li>
+							{% for child in list.children %}
+								<span class='form-label'>{{child.label}}</span>: {{child.leaf_content}} &nbsp;
+							{% endfor %}
+							</li>
+						{% endfor %}
+						</ul>
+
+					{% elif node.leaf_type == 'dict' %}
+						<p class='form-title'>{{node.label}}</p>
+						<ul>
+						{% for child in node.children %}
+								<li><span class='form-label'>{{child.label}}</span>: {{child.leaf_content}}</li>
+						{% endfor %}
+						</ul>
+					{% else %}
+						<p>Houston, we have a problem. {{node.leaf_type}}</p>
+					{% endif %}
+		{% else %}
+			 <div class="card {% if node.is_root_leaf %}root-leaf{% endif %}">
+			 	 <div class="card-header">
+           <div class="breadcrumb-wrapper">
+             <ol class="breadcrumb">
+               {% for crumb in crumbs %}
+                 <li class="breadcrumb-item {% if loop.last %}font-weight-bold{% endif %}">{{crumb}}</li>
+               {% endfor %}
+             </ol>
+           </div>
+		        <p class="edit">
+		          {% if node.is_root_leaf and not current_user.is_anonymous %}
+		           <a class="edit-btn btn btn-light btn-sm float-right" href="{{ url_for('main.edit_protocols', id = node.id) }}">Modifier</a>
+			        {% endif %}
+		        </p>
+
+		      </div>
+		      <div id="{{node.id}}" class="card-body">
+							{{loop(node.children)}}
+					</div><!-- / end panel-collapse -->
+				</div> <!-- / end panel-group -->
+		{% endif %}
+	{% endfor %}
+	</div>
+</div>
+
+{%endblock%}
