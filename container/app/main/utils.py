@@ -1,7 +1,37 @@
+# coding=utf-8
+
 import re
 import unidecode
 import sqlite3 as sql
 import json
+
+from flask import current_app
+
+def get_config_json(fn=None):
+    if fn is None:
+        fn = current_app.config['CONFIG_JSON_FILENAME']
+    config = {}
+    try:
+        with open(fn, 'r', encoding='utf-8') as f:
+            json_config = json.load(f)
+        config = json_config
+    except:
+        raise(Exception('Missing or corrupted config json file in {}'.format(fn)))
+
+    required_keys = (
+        ('profondeur', int),
+    )
+
+    for k, _type in required_keys:
+        if k not in config.keys():
+            raise(Exception('Config file must include key "{}"'.format(k)))
+        if not isinstance(config[k], _type):
+            raise(Exception('Value "{}" for key "{}" in config file is not of type {}'.format(
+                config[k], k, _type)))
+
+    for k, v in config.items():
+        current_app.config[k] = v
+    return config
 
 def camelify(s):
     """

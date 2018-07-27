@@ -5,7 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'app.db')
+        'sqlite:///' + os.path.join(basedir, 'data', 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
@@ -14,6 +14,8 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['your-email@example.com']
     TEMPLATES_AUTO_RELOAD = True
+    JSON_AS_ASCII=True
 
-    PROTOCOLS_DB = os.path.join(basedir, 'data', 'protocols.db')
+    PROTOCOLS_DB = os.path.join(basedir, 'data', 'repertoire.db')
+    CONFIG_JSON_FILENAME = os.path.join(basedir, 'data', 'config.json')
     ROOT_DIR = basedir

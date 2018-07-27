@@ -1,18 +1,42 @@
+# coding=utf-8
+
+import json
+
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, TextField, FormField, FieldList, RadioField
 from wtforms.validators import DataRequired
 
-from app.main.utils import slugify, camelify
+from app.main.utils import slugify, camelify, get_config_json
 
 class DataTree:
 
     def __init__(self, json_data):
         self.json_data = json_data
         self.index = {}
-        self.root = DataTree.json_to_graph(self.json_data, parent=None, tree=self, keys=[])
+        self.config = get_config_json()
+        self.depth_limit = self.config['profondeur']
+        self.root = DataNode(tree=self)
+
+        children = []
+        for k, v in self.json_data.items():
+            print('-'*100)
+            print(k)
+            d = {}
+            d[k] = v
+            print(d.keys())
+            children.append(DataTree.json_to_graph(self, d, parent=self.root, keys=[0],
+            root_level=1,
+            prefix='0'))
+        self.root.children = children
+
+        # print('but think of the children!')
+        # for i in self.root.children:
+        #     print(i.id)
+        #     for j in i.children:
+        #         print(' ', j.id)
 
     @staticmethod
-    def json_to_graph(json_data, root_level=0, is_parent_leaf=False, prefix='', parent=None, tree=None, keys=[]):
+    def json_to_graph(tree, json_data, root_level=0, is_parent_leaf=False, prefix='', parent=None, keys=[]):
         """Converts json object into graph object that is easier to traverse and output in template.
 
         Args:
@@ -64,12 +88,14 @@ class DataTree:
                                    ]
         """
 
-        # first survey
+        depth_limit = tree.depth_limit
 
         level = root_level
         for key, node_data in json_data.items():
+            # key = key.decode('utf-8')
             keys = list(keys)
             keys.append(key)
+            depth = len(keys)-1
 
             node_id = '{prefix}_{level}-{slug}'.format(
                 prefix=prefix,
@@ -77,12 +103,14 @@ class DataTree:
                 slug=slugify(key))
             node_id = node_id.strip('_')
 
+            # print(' ' * root_level, node_id)
+
             is_root_leaf, is_leaf, is_terminal_leaf, is_child_leaf = False, False, False, False
 
             if is_parent_leaf:
                 is_leaf = True
                 is_child_leaf = True
-            elif DataTree.is_leaf(key, node_data):
+            elif DataTree.is_leaf(key, node_data, depth, depth_limit):
                 is_leaf = True
                 is_root_leaf = True
 
@@ -117,12 +145,12 @@ class DataTree:
                     child_dict = {child_key: child_node_data}
                     children.append(
                         DataTree.json_to_graph(
+                            tree,
                             child_dict,
                             root_level=level+1,
                             prefix=node_id,
                             is_parent_leaf=is_leaf,
                             parent=node,
-                            tree=tree,
                             keys=keys,
                         )
                     )
@@ -132,25 +160,26 @@ class DataTree:
                     child_dict = { 'list' : child_node_data}
                     children.append(
                         DataTree.json_to_graph(
+                            tree,
                             child_dict,
                             root_level=level+1,
                             is_parent_leaf=is_leaf,
                             prefix=node_id,
                             parent=node,
-                            tree=tree,
                             keys=keys
                         )
                     )
 
-            node.children = children
+            node.children = sorted(children, key=lambda x: x.label)
             return node
 
     @staticmethod
-    def is_leaf(key, value):
+    def is_leaf(key, value, depth, depth_limit):
         """
         Predefined manner to determine if node is leaf (can be changed if we decide to change the schema in the future).
         """
-        rvalue = isinstance(value, dict) and len(value.items()) > 1 and 'SALLE' in key
+        rvalue = depth >= depth_limit
+        # rvalue = isinstance(value, dict) and len(value.items()) > 1 and 'SALLE' in key
         return rvalue
 
 class DataNode:
@@ -229,7 +258,8 @@ class DataNode:
         return d
 
     def get_key_path(self):
-        return self.keys
+        keys = [k for k in self.keys if k != 0]
+        return keys
 
 
     @staticmethod
@@ -276,7 +306,7 @@ class DataNode:
 
             if node.leaf_type == 'str' or node.leaf_type == 'bool':
                 # define form attribute (field)
-                DynamicForm.append_field(attr, TextField(node.label, validators=[DataRequired()], id=field_id))
+                DynamicForm.append_field(attr, TextField(node.label, validators=[], id=field_id))
 
             elif node.leaf_type == 'dict':
                 sub_form_class = self.get_form_class_for_attr(attr)
@@ -285,7 +315,7 @@ class DataNode:
                     child_attr = camelify(child.label)
                     self.index[child_attr] = child.label
                     child_field_id = slugify(child.label)
-                    sub_form_class.append_field(child_attr, TextField(child.label, validators=[DataRequired()], id=child_field_id))
+                    sub_form_class.append_field(child_attr, TextField(child.label, validators=[], id=child_field_id))
                 DynamicForm.append_field(attr, FormField(sub_form_class, id=field_id))
 
             elif node.leaf_type == 'list':
@@ -296,7 +326,7 @@ class DataNode:
                     child_attr = camelify(child.label)
                     self.index[child_attr] = child.label
                     child_field_id = slugify(child.label)
-                    sub_form_class.append_field(child_attr, TextField(child.label, validators=[DataRequired()], id=child_field_id))
+                    sub_form_class.append_field(child_attr, TextField(child.label, validators=[], id=child_field_id))
                 DynamicForm.append_field(attr, FieldList(FormField(sub_form_class, id=field_id)))
 
 

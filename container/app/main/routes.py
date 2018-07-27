@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from flask import render_template, flash, redirect, url_for, request, g, current_app, jsonify
 from flask_login import current_user, login_required
 
@@ -19,7 +21,7 @@ from app.main.utils import get_json_data
 def index():
     json_data = get_json_data(current_app)
     tree_obj = DataTree(json_data)
-    return render_template('index.html', title='Accueil', protocols=[tree_obj.root])
+    return render_template('index.html', title='Accueil', protocols=tree_obj.root.children)
 
 @bp.route('/api/lookup', methods=['GET'])
 def searchbar_lookup():

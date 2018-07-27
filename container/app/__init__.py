@@ -95,7 +95,7 @@ def create_app(config_class=Config):
 
             else:
 
-                with open(json_data_fn, 'r') as f:
+                with open(json_data_fn, 'r', encoding='utf-8') as f:
                     json_data = json.load(f)
 
                 json_str = json.dumps(json_data)
