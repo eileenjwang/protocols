@@ -19,11 +19,8 @@ class DataTree:
 
         children = []
         for k, v in self.json_data.items():
-            print('-'*100)
-            print(k)
             d = {}
             d[k] = v
-            print(d.keys())
             children.append(DataTree.json_to_graph(self, d, parent=self.root, keys=[0],
             root_level=1,
             prefix='0'))
