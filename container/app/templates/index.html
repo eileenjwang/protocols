@@ -3,8 +3,6 @@
 
 {% block app_content %}
   <!-- <br> -->
-  <h2 class="text-center">Protocoles </h2>
-
   <div class="row">
     <div class="col-12 protocols">
       <div class="row">
@@ -15,7 +13,7 @@
             <!-- <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01">Rechercher un Protocole</label>
             </div> -->
-            <input type="text" class="form-control" placeholder="ex: ischémie"  name="protocol-searchbar" id="protocols-autocomplete">
+            <input type="text" class="form-control" placeholder="{{config.placeholder_recherche}}"  name="protocol-searchbar" id="protocols-autocomplete">
             <!-- <div class="input-group-append">
               <label class="input-group-text" >Recherche</button>
             </div> -->

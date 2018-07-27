@@ -137,3 +137,16 @@ padding: 10px 15px;
 .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
 .autocomplete-group { padding: 2px 5px; }
 .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+
+
+
+.json-form textarea {
+  padding-top:10px;
+  padding-bottom:25px; /* increased! */
+  height: 500px;
+  max-height: 1000px;
+  /* height:16px; */
+  /* line-height:16px; */
+  width:90%; /* changed from 96 to 100% */
+  display:block;
+}

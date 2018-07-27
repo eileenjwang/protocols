@@ -1,11 +1,11 @@
 from flask import request
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextField, FormField, FieldList
+from wtforms import StringField, SubmitField, TextField, FormField, FieldList, TextAreaField
 from wtforms.validators import ValidationError, DataRequired
 from app.models import User
+from app.main.graph_models import DataTree
 
-
-
+import json
 
 class EditProfileForm(FlaskForm):
     username = StringField('Nom d\'utilisateur', validators=[DataRequired()])
@@ -44,6 +44,35 @@ class Production(FlaskForm):
     class Meta:
         csrf = False
     Production = TextField("Production", validators=[DataRequired()])
+
+class JsonForm(FlaskForm):
+    jsonstr = TextAreaField("JSON ",validators=[DataRequired()])
+
+    def validate(self):
+        rv = FlaskForm.validate(self)
+        if not rv:
+            return False
+
+        try:
+            json_data = json.loads(self.jsonstr.data)
+        except Exception as e:
+            print('JSON invalide:')
+            print(str(e))
+            self.jsonstr.errors.append('Votre JSON est invalide. Utilisez <a href="https://jsonlint.com/">jsonlint.com</a> pour vous aider à le valider.')
+            return False
+
+        if len(json_data.keys()) == 0:
+            self.jsonstr.errors.append('Votre JSON est vide')
+            return False
+
+        try:
+            tree = DataTree(json_data)
+        except Exception as e:
+            print('JSON mal formatte')
+            print(str(e))
+            self.jsonstr.errors.append('Votre JSON ne respecte pas le format approprié')
+            return False
+        return True
 
 class EditProtocolsForm(FlaskForm):
     Implantation = TextField("Implantation ",validators=[DataRequired()])

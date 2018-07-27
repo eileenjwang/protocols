@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+  <!-- <br> -->
+
+
+
+<div class="row justify-content-md-center">
+  <div class="col-10">
+        <div class="breadcrumb-wrapper">
+          <h5>JSON Source</h5>
+        </div>
+         <p class="edit">
+           {% if not current_user.is_anonymous %}
+            <a class="edit-btn btn btn-light btn-sm float-right" href="{{ url_for('main.edit_last_json') }}">Modifier</a>
+           {% endif %}
+         </p>
+  </div>
+</div>
+<div class="row justify-content-md-center">
+  <div class="col-10">
+         <pre>
+           <code class="json">{{json_text}}
+            </code>
+          </pre>
+  </div> <!-- / end panel-group -->
+</div>
+{% endblock %}
+
+
+{% block css %}
+<link href="{{ url_for('static', filename='bower_components/highlightjs/styles/mono-blue.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='bower_components/highlightjs/highlight.pack.min.js') }}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}

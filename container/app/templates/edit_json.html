@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+  <!-- <br> -->
+
+<div class="row">
+    <div class="col-12 json">
+    <h5 >Modifier JSON</h5>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-12 json">
+         <form class="json-form" method="post" role="form">
+             {{ form.hidden_tag() }}
+                <div class="form-group row">
+                  <!-- {{form.jsonstr.label(class_="col-12 col-form-label")}} -->
+                  {{form.jsonstr(class_="form-control col-12", id="json-textarea")}}
+               </div>
+             <button class="btn btn-primary mb-2" id="submit" name="submit" value="Soumettre" type="submit">Soumettre</button>
+         </form>
+	</div>
+</div>
+
+{%endblock%}
+
+
+{% block js %}
+<!-- Custom JS -->
+<!-- <script src="{{ url_for('static', filename='js/resize-textarea.js') }}?q=1280011holaquetal"></script> -->
+{% endblock %}
