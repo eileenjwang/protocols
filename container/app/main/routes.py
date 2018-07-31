@@ -126,7 +126,7 @@ def view_protocols(id):
 def view_last_json():
 
     json_data = get_json_data(current_app)
-    json_text = json.dumps(json_data, indent=2)
+    json_text = json.dumps(json_data, indent=2, ensure_ascii=False)
     return render_template('view_json.html', json_text=json_text)
 
 @bp.route('/edit_json', methods=['GET', 'POST'])
@@ -137,7 +137,7 @@ def edit_last_json():
     form = JsonForm()
     if request.method == 'GET':
         json_data = get_json_data(current_app)
-        json_text = json.dumps(json_data, indent=2)
+        json_text = json.dumps(json_data, indent=2, ensure_ascii=False)
         form.jsonstr.data = json_text
         return render_template('edit_json.html', form=form)
 
