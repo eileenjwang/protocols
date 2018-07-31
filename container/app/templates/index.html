@@ -5,14 +5,14 @@
   <!-- <br> -->
   <div class="row">
     <div class="col-12 protocols">
-      <div class="row">
-        <div class="col-12 protocols-searchbar">
-          <h4 class="title">Recherche </h4>
+      <div class="row justify-content-md-center">
+        <div class="col-10 protocols-searchbar">
+          <!-- <h4 class="title">Recherche </h4> -->
 
           <div class="input-group mb-3 input-group-lg">
-            <!-- <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01">Rechercher un Protocole</label>
-            </div> -->
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Recherche</label>
+            </div>
             <input type="text" class="form-control" placeholder="{{config.placeholder_recherche}}"  name="protocol-searchbar" id="protocols-autocomplete">
             <!-- <div class="input-group-append">
               <label class="input-group-text" >Recherche</button>
@@ -28,6 +28,7 @@
       <div class="col-12">
         <h4 class="title">Navigation</h4>
 
+        <div  id="accordion">
     	{% for node in protocols recursive %}
     		{% if node.is_child_leaf %}
     					{% if node.leaf_type == 'str' or node.leaf_type == 'bool' %}
@@ -56,10 +57,10 @@
     						<p>Houston, we have a problem. {{node.leaf_type}}</p>
     					{% endif %}
     		{% else %}
-    			 <div class="card {% if node.is_root_leaf %}root-leaf{% endif %}">
+    			 <div class="card {% if node.is_root_leaf %}root-leaf{% endif %}" id="{{node.parent.id}}">
     			 	 <div class="card-header">
     		        <p>
-    		          <a data-toggle="collapse" href="#{{node.id}}" class="accordion-link collapsed">
+    		          <a data-toggle="collapse" data-target="#{{node.id}}" class="accordion-link collapsed">
     		            {% if node.label == " " %}Contenu Vide{% else %}{{node.label}} {% endif %}
     		          </a>
     		          {% if node.is_root_leaf and not current_user.is_anonymous %}
@@ -68,12 +69,15 @@
     		        </p>
 
     		      </div>
-    		      <div id="{{node.id}}" class="card-body collapse">
+    		      <div id="{{node.id}}" data-parent="#{% if node.level == 1 %}accordion{% else %}{{node.parent.id}}{% endif %}" class="collapse">
+                <div class="card-body">
     							{{loop(node.children)}}
+                </div>
     					</div><!-- / end panel-collapse -->
     				</div> <!-- / end panel-group -->
     		{% endif %}
     	{% endfor %}
+    </div>
     	</div>
     </div>
   </div>
