@@ -1,5 +1,3 @@
-# coding=utf-8
-
 from flask import render_template, flash, redirect, url_for, request, g, current_app, jsonify, Markup
 from flask_login import current_user, login_required
 
@@ -12,7 +10,7 @@ from app.models import User
 from app.main import bp
 from app import csrf
 from app.main.graph_models import DataTree
-from app.main.utils import get_json_data
+from app.main.utils import get_json_data, flatten
 from app.main.forms import JsonForm
 
 @bp.route('/', methods=['GET', 'POST'])
@@ -31,23 +29,59 @@ def searchbar_lookup():
     tree_obj = DataTree(json_data)
     protocols = [tree_obj.root]
 
+    def _to_dict(node):
+        d = {}
+        for _node in node.children:
+            if _node.leaf_type == 'str':
+                d[_node.label] = _node.leaf_content
+
+            elif _node.leaf_type == 'bool':
+                d[_node.label] = str(_node.leaf_content)
+
+            elif _node.leaf_type == 'dict':
+                sub_d = {}
+                for child in _node.children:
+                    sub_d[child.label] = child.leaf_content
+                d[_node.label] = sub_d
+
+            elif _node.leaf_type == 'list':
+                sub_d = {}
+                for i, _node_list in enumerate(_node.children):
+                    for child in _node_list.children:
+                        child_label = '{}_{}'.format(i, child.label)
+                        sub_d[child_label] = child.leaf_content
+                d[_node.label] = sub_d
+        return d
+
     def _searchbar_recursive_helper(protocol_list, node):
         if node.is_root_leaf:
             key_path = node.get_key_path()
-            # key_path[-1] = '<span class="last">' + key_path[-1] + '</span>'
-            item = {
-                'value': ' \\ '.join(key_path),
-                'id': node.id,
-                'url': url_for('main.view_protocols', id=node.id)
-                 }
-            return item
+            node_dict = _to_dict(node)
+            # print(node_dict)
+            flat_dict = flatten(node_dict)
+            # search_str = ','.join(flat_dict.keys())
+            parent_str = ' \\ '.join(key_path)
+            items = []
+            for k, v in flat_dict.items():
+                # key_path[-1] = '<span class="last">' + key_path[-1] + '</span>'
+                item = {
+                    'value': k + ' : ' + str(v),
+                    'data':
+                        {
+                            'category': parent_str,
+                            'id': node.id,
+                            'url': url_for('main.view_protocols', id=node.id)
+                        }
+                     }
+                items.append(item)
+            return items
 
         else:
             if not node.is_leaf:
                 for child_node in node.children:
-                    item = _searchbar_recursive_helper(protocol_list, child_node)
-                    if item:
-                        protocol_list.append(item)
+                    items = _searchbar_recursive_helper(protocol_list, child_node)
+                    if items:
+                        protocol_list.extend(items)
 
     lookup_data = []
     _searchbar_recursive_helper(lookup_data, tree_obj.root)

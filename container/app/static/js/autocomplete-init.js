@@ -4,6 +4,7 @@ $( document ).ready(function() {
 
     $('#protocols-autocomplete').autocomplete({
         lookup: protocols,
+        groupBy: 'category',
         onSelect: function (suggestion) {
           window.location.href = suggestion.url;
         }
