@@ -7,9 +7,10 @@ dump.rdb
 
 *.log
 
-/container/app/sandbox
-/container/logs
+container/app/sandbox
+container/logs
+container/data
 
-/container/data/protocols.db
+container/data/protocols.db
 
 .DS_Store
