@@ -166,8 +166,10 @@ class DataTree:
                             keys=keys
                         )
                     )
-
-            node.children = sorted(children, key=lambda x: x.label)
+            if not is_leaf:
+                node.children = sorted(children, key=lambda x: x.label)
+            else:
+                node.children = children
             return node
 
     @staticmethod
