@@ -6,7 +6,7 @@ $( document ).ready(function() {
         lookup: protocols,
         groupBy: 'category',
         onSelect: function (suggestion) {
-          window.location.href = suggestion.url;
+          window.location.href = suggestion.data.url;
         }
     });
   });
