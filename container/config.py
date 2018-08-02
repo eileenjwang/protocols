@@ -16,6 +16,13 @@ class Config(object):
     TEMPLATES_AUTO_RELOAD = True
     JSON_AS_ASCII=True
 
-    PROTOCOLS_DB = os.path.join(basedir, 'data', 'repertoire.db')
+    PROTOCOLS_DB_FN = os.path.join(basedir, 'data', 'repertoire.db')
+    PROTOCOLS_DB_URI = 'sqlite:///' + PROTOCOLS_DB_FN
     CONFIG_JSON_FILENAME = os.path.join(basedir, 'data', 'config.json')
     ROOT_DIR = basedir
+
+    # Flask-User settings
+    USER_APP_NAME = "Radiologie CHUM"      # Shown in and email templates and page footers
+    USER_ENABLE_EMAIL = False      # Disable email authentication
+    USER_ENABLE_USERNAME = True    # Enable username authentication
+    USER_REQUIRE_RETYPE_PASSWORD = True    # False to simplify register form

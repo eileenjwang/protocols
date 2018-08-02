@@ -87,7 +87,7 @@ def slugify(s):
     return s
 
 def get_json_data(app):
-    with sql.connect(app.config.get('PROTOCOLS_DB')) as con:
+    with sql.connect(app.config.get('PROTOCOLS_DB_FN')) as con:
         cur = con.cursor()
         cur.execute("SELECT JSON_text FROM Protocols ORDER BY version_id DESC LIMIT 1")
         rows = cur.fetchall()
