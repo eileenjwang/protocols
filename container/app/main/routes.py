@@ -1,6 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request, g, current_app, jsonify, Markup
 from flask_login import current_user
-from flask_user import login_required
+from flask_user import current_user, login_required, roles_required
+
 
 import sqlite3 as sql
 import json
@@ -23,8 +24,8 @@ def index():
     tree_obj = DataTree(json_data)
     return render_template('index.html', title='Accueil', protocols=tree_obj.root.children)
 
-@login_required
 @bp.route('/api/lookup', methods=['GET'])
+@login_required
 def searchbar_lookup():
     json_data = get_json_data(current_app)
     tree_obj = DataTree(json_data)
@@ -109,8 +110,8 @@ def edit_profile():
         form.username.data = current_user.username
     return render_template('edit_profile.html', title='Modifier votre profil', form=form)
 
-@login_required
 @bp.route('/view_item/<id>', methods=['GET'])
+@login_required
 def view_protocols(id):
     json_data = get_json_data(current_app)
     tree_obj = DataTree(json_data)
@@ -120,7 +121,6 @@ def view_protocols(id):
 
     return render_template('view_protocols.html', protocols=[node], protocol_title=protocol_title, crumbs=key_path)
 
-@login_required
 @bp.route('/view_json', methods=['GET'])
 @login_required
 @csrf.exempt
@@ -131,10 +131,10 @@ def view_last_json():
     return render_template('view_json.html', json_text=json_text)
 
 @bp.route('/edit_json', methods=['GET', 'POST'])
+@roles_required('Special')
 @login_required
 @csrf.exempt
 def edit_last_json():
-
     form = JsonForm()
     if request.method == 'GET':
         json_data = get_json_data(current_app)
