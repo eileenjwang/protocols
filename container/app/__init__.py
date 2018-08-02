@@ -23,6 +23,15 @@ mail = Mail()
 bootstrap = Bootstrap()
 csrf = CSRFProtect()
 
+user_manager = None
+
+# def init_db(app):
+#     global db
+#     db = SQLAlchemy(app)
+#     from app.models import User
+#     print('Creating models..')
+#     db.create_all()
+
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
@@ -31,6 +40,8 @@ def create_app(config_class=Config):
     app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
     db.init_app(app)
+    with app.app_context():
+        db.create_all()
     migrate.init_app(app, db)
     login.init_app(app)
     mail.init_app(app)
@@ -77,8 +88,10 @@ def create_app(config_class=Config):
         app.logger.setLevel(logging.INFO)
         app.logger.info('Protocols startup')
 
+
     # Create protocols database if it does not exist
-    with sql.connect(app.config.get('PROTOCOLS_DB')) as con:
+    print(app.config.get('PROTOCOLS_DB_FN'))
+    with sql.connect(app.config.get('PROTOCOLS_DB_FN')) as con:
         cur = con.cursor()
         sql_query = "SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}';".format(table_name='Protocols')
         cur.execute(sql_query)
@@ -105,6 +118,14 @@ def create_app(config_class=Config):
                 cur.execute("INSERT INTO Protocols (user, timestamp, JSON_text) VALUES (?,?,?)",
                     (user, now, json_str,))
                 con.commit()
+
+    # Setup Flask-User and specify the User data-model
+    from app.models import User
+    from flask_user import UserManager
+    global user_manager
+    user_manager = UserManager(app, db, User)
+
     return app
 
 from app import models
+from app.models import User
