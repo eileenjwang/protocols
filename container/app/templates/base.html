@@ -43,9 +43,27 @@
         <ul class="nav navbar-nav mt-2 mt-lg-0">
             <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}">Accueil</a></li>
         </ul>
+        {% if current_user.is_authenticated %}
+        <ul class="nav navbar-nav mt-2 mt-lg-0">
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('main.edit_user_information', username=current_user.username) }}">Mes informations</a></li>
+        </ul>
+        {% endif %}
+
+        {% if current_user.is_admin %}
+        <ul class="nav navbar-nav mt-2 mt-lg-0">
+            <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
+        </ul>
+        {% endif %}
+
+        {% if current_user.is_admin %}
         <ul class="nav navbar-nav mt-2 mt-lg-0">
             <li class="nav-item"><a class="nav-link" href="{{ url_for('main.view_last_json') }}">JSON</a></li>
         </ul>
+        {% endif %}
+
+
+
+
 
         <ul class="nav navbar-nav my-2 ml-auto  my-lg-0 navbar-right">
             {% if current_user.is_anonymous %}

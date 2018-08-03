@@ -4,26 +4,31 @@ import os
 from flask import Flask, request, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_login import LoginManager
+# from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from config import Config
 from flask_wtf.csrf import CSRFProtect
+from flask_user import current_user, UserManager, SQLAlchemyAdapter
+from flask import g
 
 import sqlite3 as sql
 import json
 import datetime
+from sqlalchemy import and_
 
 db = SQLAlchemy()
 migrate = Migrate()
-login = LoginManager()
-login.login_view = 'auth.login'
-login.login_message = 'Please log in to access this page.'
+# user_manager = UserManager(None, db, )
+
+# login = LoginManager()
+# login.login_view = 'auth.login'
+# login.login_message = 'Please log in to access this page.'
 mail = Mail()
 bootstrap = Bootstrap()
 csrf = CSRFProtect()
 
-user_manager = None
+# user_manager = None
 
 # def init_db(app):
 #     global db
@@ -43,7 +48,7 @@ def create_app(config_class=Config):
     with app.app_context():
         db.create_all()
     migrate.init_app(app, db)
-    login.init_app(app)
+    # login.init_app(app)
     mail.init_app(app)
     bootstrap.init_app(app)
 
@@ -119,13 +124,48 @@ def create_app(config_class=Config):
                     (user, now, json_str,))
                 con.commit()
 
-    # Setup Flask-User and specify the User data-model
-    from app.models import User
-    from flask_user import UserManager
-    global user_manager
-    user_manager = UserManager(app, db, User)
+    # Setup Flask-User
+    # from app.models import User
+    # user_manager = UserManager(app, db, User)
+    # g.user_manager = user_manager
+    # app.config['user_manager'] = user_manager
+    # user_manager.init(app)
 
+    @app.context_processor
+    def context_processor():
+        return dict(user_manager=user_manager, current_user=current_user)
+    # #
+    from app.models import User
+    from app.models import user_manager
+    user_manager.init_app(app, db, User)
+    # from flask_user import UserManager
+    # global user_manager
+    # user_manager = UserManager(app, db, User)
+
+    # setup admin
+    from app.admin import setup_admin
+    with app.app_context():
+        setup_admin(app, db)
+
+    # make sure admins have admin roles
+    with app.app_context():
+        admin_role = Role.query.filter(Role.name == 'Admin').one_or_none()
+        if not admin_role:
+            admin_role = Role(name='Admin')
+        for username in app.config['ADMIN_USERNAMES']:
+            print(username)
+            user = User.query.filter(User.username == username).one_or_none()
+            if user:
+                print('Found user')
+                # user_is_admin = user.is_admin
+                # UserRoles.query.filter(and_(UserRoles.user_id == user.id, UserRoles.role_id == admin_role.id))
+                if not user.is_admin:
+                    print('User is not admin')
+                    user.roles.append(admin_role)
+                    db.session.add(user)
+                    db.session.commit()
     return app
 
 from app import models
-from app.models import User
+from app.models import User, Role, UserRoles
+# user_manager = UserManager(app, db, User)

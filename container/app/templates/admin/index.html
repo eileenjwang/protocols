@@ -1,0 +1,10 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+{% if current_user.is_anonymous %}
+  <p>Il faut être admin pour avoir accès à cette page./p>
+{% else %}
+  <p>Utilisateurs: </p>
+  <p>Roles: </p>
+{% endif %}
+{% endblock %}

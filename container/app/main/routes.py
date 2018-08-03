@@ -15,6 +15,8 @@ from app.main.graph_models import DataTree
 from app.main.utils import get_json_data, flatten
 from app.main.forms import JsonForm
 
+from app.main.admin_utils import update_users, find_user_node, get_username_for_node
+
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index/', methods=['GET', 'POST'])
 @login_required
@@ -112,10 +114,11 @@ def edit_profile():
 
 @bp.route('/view_item/<id>', methods=['GET'])
 @login_required
-def view_protocols(id):
-    json_data = get_json_data(current_app)
-    tree_obj = DataTree(json_data)
-    node = tree_obj.index[id]
+def view_protocols(id, tree=None):
+    if not tree:
+        json_data = get_json_data(current_app)
+        tree = DataTree(json_data)
+    node = tree.index[id]
     key_path = node.get_key_path()
     protocol_title = " \\ ".join(key_path)
 
@@ -131,7 +134,7 @@ def view_last_json():
     return render_template('view_json.html', json_text=json_text)
 
 @bp.route('/edit_json', methods=['GET', 'POST'])
-@roles_required('Special')
+# @roles_required('Admin')
 @login_required
 @csrf.exempt
 def edit_last_json():
@@ -140,6 +143,7 @@ def edit_last_json():
         json_data = get_json_data(current_app)
         json_text = json.dumps(json_data, indent=2, ensure_ascii=False)
         form.jsonstr.data = json_text
+
         return render_template('edit_json.html', form=form)
 
     elif request.method == 'POST':
@@ -149,13 +153,17 @@ def edit_last_json():
 
             # save new version to db
             print('Nouvelle version json..')
-            with sql.connect(current_app.config.get('PROTOCOLS_DB')) as con:
+            with sql.connect(current_app.config.get('PROTOCOLS_DB_FN')) as con:
                 cur = con.cursor()
                 now = str(datetime.datetime.now())
                 user = str(current_user.username)
                 cur.execute("INSERT INTO Protocols (user, timestamp, JSON_text) VALUES (?,?,?)",
                     (user, now, json_str,))
                 con.commit()
+
+            # update users
+            tree = DataTree(json_dict)
+            update_users(tree)
 
             flash('Vos changements ont été enregistrés.')
             return redirect(url_for('main.index'))
@@ -168,12 +176,21 @@ def edit_last_json():
 @bp.route('/edit_item/<id>', methods=['GET', 'POST'])
 @login_required
 @csrf.exempt
-def edit_protocols(id):
-
+def edit_protocols(id, pre_authorise=False):
     json_data = get_json_data(current_app)
     tree_obj = DataTree(json_data)
 
+    if id not in tree_obj.index.keys():
+        flash("ID invalide")
+        return redirect(url_for('main.index'))
     form_node = tree_obj.index[id]
+
+    if not pre_authorise and not current_user.is_admin:
+        node_username = get_username_for_node(form_node)
+        if current_user.username != node_username:
+            flash("Vous n'êtes pas autorisé à accéder à cette page.")
+            return redirect(url_for('main.index'))
+
     title = 'Modifier protocole {}'.format(form_node.label)
 
     key_path = form_node.get_key_path()
@@ -207,3 +224,24 @@ def edit_protocols(id):
 
         flash('Vos changements ont été enregistrés.')
         return redirect(url_for('main.index'))
+
+@bp.route('/edit_user/<username>', methods=['GET', 'POST'])
+@login_required
+@csrf.exempt
+def edit_user_information(username):
+    if current_user.is_admin:
+        user = User.query.filter(User.username == username).one_or_none()
+        if not user:
+            flash("Cet utilisateur n'a pas de profile JSON.")
+            return redirect(url_for('main.index'))
+    else:
+        # user is not admin, make sure that the username is accessible
+        if current_user.username != username:
+            flash("Vous n'êtes pas autorisé à accéder à cette page.")
+            return redirect(url_for('main.index'))
+        user = current_user
+
+    json_data = get_json_data(current_app)
+    tree = DataTree(json_data)
+    node = find_user_node(username, tree)
+    return view_protocols(node.id)

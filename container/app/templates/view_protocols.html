@@ -45,7 +45,7 @@
              </ol>
            </div>
 		        <p class="edit">
-		          {% if node.is_root_leaf and not current_user.is_anonymous %}
+		          {% if node.is_root_leaf and (current_user.is_admin or current_user.username == node.username) %}
 		           <a class="edit-btn btn btn-light btn-sm float-right" href="{{ url_for('main.edit_protocols', id = node.id) }}">Modifier</a>
 			        {% endif %}
 		        </p>

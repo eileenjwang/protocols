@@ -6,7 +6,7 @@ from flask_wtf import FlaskForm
 from wtforms import SubmitField, TextField, FormField, FieldList, RadioField
 from wtforms.validators import DataRequired
 
-from app.main.utils import slugify, camelify, get_config_json
+from app.main.utils import slugify, camelify, get_config_json, get_username_for_node
 
 class DataTree:
 
@@ -375,6 +375,12 @@ class DataNode:
                         #     field_list.entries[i] = child_form
 
         return form
+
+    @property
+    def username(self):
+        if not self.is_root_leaf:
+            return None
+        return get_username_for_node(self)
 
 class BaseForm(object):
     @classmethod

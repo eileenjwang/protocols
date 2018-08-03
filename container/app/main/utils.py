@@ -4,6 +4,8 @@ import re
 import unidecode
 import sqlite3 as sql
 import json
+import random
+import string
 
 from flask import current_app
 
@@ -20,6 +22,7 @@ def get_config_json(fn=None):
 
     required_keys = (
         ('profondeur', int),
+        ('username_field', str),
     )
 
     for k, _type in required_keys:
@@ -109,3 +112,15 @@ def flatten(d, parent_key='', sep='_'):
         else:
             items.append((new_key, v))
     return dict(items)
+
+def get_random_password(n=8):
+    pwd = ''.join(random.choices(string.ascii_uppercase + string.digits, k=n))
+    return pwd
+
+def get_username_for_node(node):
+    config = get_config_json()
+    username_field = config['username_field']
+    for child in node.children:
+        if child.label == username_field:
+            return child.leaf_content
+    return None
