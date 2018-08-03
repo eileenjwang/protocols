@@ -73,20 +73,15 @@ def update_users(tree):
         # check if username exists
         user = User.query.filter(User.username == username).one_or_none()
         print(username, email)
-        if user:
-            db.session.delete(user)
+        if not user:
+            # if user does not exist, create a user with a tmp password
+            tmp_password = get_random_password()
+            hash_password = user_manager.hash_password(tmp_password)
+            user = User(username=username, email=email, tmp_password=tmp_password, password=hash_password, reinitialise=False)
+
+            # user.tmp_password = tmp_password
+            # user.set_password(tmp_password)
+            if role in roles.keys():
+                user.roles = [user_role,]
+            db.session.add(user)
             db.session.commit()
-
-
-
-        # if user does not exist, create a user with a tmp password
-        tmp_password = get_random_password()
-        hash_password = user_manager.hash_password(tmp_password)
-        user = User(username=username, email=email, tmp_password=tmp_password, password=hash_password, reinitialise=False)
-
-        # user.tmp_password = tmp_password
-        # user.set_password(tmp_password)
-        if role in roles.keys():
-            user.roles = [user_role,]
-        db.session.add(user)
-        db.session.commit()
